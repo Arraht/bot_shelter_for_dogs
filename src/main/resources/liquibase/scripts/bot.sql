@@ -10,16 +10,17 @@ workingFirstTime TIMESTAMP,
 workingLastTime TIMESTAMP
 );
 CREATE TABLE answer(
-id SERIAL,
+id SERIAL PRIMARY KEY,
 command TEXT,
-message TEXT
+message TEXT UNIQUE
 );
 CREATE TABLE BotTalkClient(
 id SERIAL,
+answerId INTEGER PRIMARY KEY,
 name TEXT,
 chatId INTEGER,
 timeSendMessage TIMESTAMP,
 initialSend TEXT,
-answerMessage TEXT,
+message TEXT REFERENCES answer(message),
 successOfSending BOOLEAN
 )
