@@ -46,16 +46,9 @@ public class BotTalkClient {
     }
 
     public String toString() {
-        if (this.successOfSending) {
-            return "id клиена: " + this.id + "; имя клиента: "
-                    + this.name + "; Кто отправил: " + this.initialSend +
-                    "; время отправки: " + this.timeSendMessage + "; последний ответ: "
-                    + this.message + "; сообщение доставлено";
-        } else {
-            return "id клиена: " + this.id + "; имя клиента: "
-                    + this.name + "; Кто отправил: " + this.initialSend +
-                    "; время отправки: " + this.timeSendMessage + "; последний ответ: "
-                    + this.message + "; сообщение не доставлено";
-        }
+        return "id клиена: " + this.id + "; имя клиента: "
+                + this.name + "; Кто отправил: " + this.initialSend +
+                "; время отправки: " + this.timeSendMessage + "; последний ответ: "
+                + "; Статус доставки: " + this.message;
     }
 }
