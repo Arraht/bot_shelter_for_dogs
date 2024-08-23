@@ -16,12 +16,13 @@ public class VolunteersTalkClient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameVolunteers;
+    private Long volunteersId;
     private String nameClient;
     private Long chatId;
     private LocalDateTime appointmentTime;
 
     public VolunteersTalkClient(Long id, String nameVolunteers,
-                                String nameClient, Long chatId,
+                                String nameClient,Long chatId,
                                 LocalDateTime appointmentTime) {
         this.id = id;
         this.nameVolunteers = nameVolunteers;

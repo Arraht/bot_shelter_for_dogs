@@ -17,16 +17,15 @@ public class Volunteers {
     private Long id;
     private String name;
     private String nickName;
-    private Integer year;
     private LocalDateTime workingFirstTime;
     private LocalDateTime workingLastTime;
 
-    public Volunteers(Long id, String name, String nickName, Integer year, LocalDateTime workingFirstTime,
+    public Volunteers(Long id, String name, String nickName,
+                      LocalDateTime workingFirstTime,
                       LocalDateTime workingLastTime) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
-        this.year = year;
         this.workingFirstTime = workingFirstTime;
         this.workingLastTime = workingLastTime;
     }
