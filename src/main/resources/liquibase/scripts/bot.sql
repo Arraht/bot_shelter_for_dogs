@@ -1,6 +1,6 @@
--- liquibase formatted sql
+-- liquibase formated sql
 
--- changeset Igor:1
+--changeset Igor:1
 CREATE TABLE volunteers(
 id SERIAL,
 name TEXT,
@@ -9,20 +9,17 @@ year INTEGER,
 workingFirstTime TIMESTAMP,
 workingLastTime TIMESTAMP
 );
--- changeset Igor:2
 CREATE TABLE answer(
-id SERIAL PRIMARY KEY,
+id SERIAL,
 command TEXT,
 message TEXT
 );
--- changeset Igor:3
 CREATE TABLE BotTalkClient(
 id SERIAL,
-answerId INTEGER PRIMARY KEY REFERENCES answer(id),
 name TEXT,
 chatId INTEGER,
 timeSendMessage TIMESTAMP,
 initialSend TEXT,
-message TEXT,
+answerMessage TEXT,
 successOfSending BOOLEAN
 )
