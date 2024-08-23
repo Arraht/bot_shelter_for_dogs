@@ -36,5 +36,5 @@ id SERIAL,
 nameVolunteers TEXT,
 nameClient TEXT,
 chatId INTEGER,
-appointmentTime TIMESTAMP,
+appointmentTime TIMESTAMP
 )
