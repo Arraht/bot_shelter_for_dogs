@@ -16,17 +16,19 @@ public class BotTalkClient {
     private Long chatId;
     private LocalDateTime timeSendMessage;
     private String initialSend;
-    private String answerMessageId;
+    private Long answerId;
+    private String message;
     private Boolean successOfSending;
 
-    public BotTalkClient(Long id, String name, Long chatId, LocalDateTime timeSendMessage,
-                         String initialSend, String answer, Boolean successOfSending) {
+    public BotTalkClient(Long id, Long answerId, String name, Long chatId, LocalDateTime timeSendMessage,
+                         String initialSend, String message, Boolean successOfSending) {
         this.id = id;
+        this.answerId = answerId;
         this.name = name;
         this.chatId = chatId;
         this.timeSendMessage = timeSendMessage;
         this.initialSend = initialSend;
-        this.answerMessageId = answer;
+        this.message = message;
         this.successOfSending = successOfSending;
     }
 
@@ -44,16 +46,9 @@ public class BotTalkClient {
     }
 
     public String toString() {
-        if (this.successOfSending) {
-            return "id клиена: " + this.id + "; имя клиента: "
-                    + this.name + "; Кто отправил: " + this.initialSend +
-                    "; время отправки: " + this.timeSendMessage + "; последний ответ: "
-                    + this.answerMessageId + "; сообщение доставлено";
-        } else {
-            return "id клиена: " + this.id + "; имя клиента: "
-                    + this.name + "; Кто отправил: " + this.initialSend +
-                    "; время отправки: " + this.timeSendMessage + "; последний ответ: "
-                    + this.answerMessageId + "; сообщение не доставлено";
-        }
+        return "id клиена: " + this.id + "; имя клиента: "
+                + this.name + "; Кто отправил: " + this.initialSend +
+                "; время отправки: " + this.timeSendMessage + "; последний ответ: "
+                + "; Статус доставки: " + this.message;
     }
 }
