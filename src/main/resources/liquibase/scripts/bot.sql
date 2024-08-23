@@ -8,13 +8,13 @@ nickName TEXT,
 year INTEGER,
 workingFirstTime TIMESTAMP,
 workingLastTime TIMESTAMP
-);
+)
 -- changeset Igor:2
 CREATE TABLE answer(
 id SERIAL PRIMARY KEY,
 command TEXT,
 message TEXT
-);
+)
 -- changeset Igor:3
 CREATE TABLE BotTalkClient(
 id SERIAL,
