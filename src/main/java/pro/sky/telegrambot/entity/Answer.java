@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.Entity;
+package pro.sky.telegrambot.entity;
 
 import lombok.Data;
 
