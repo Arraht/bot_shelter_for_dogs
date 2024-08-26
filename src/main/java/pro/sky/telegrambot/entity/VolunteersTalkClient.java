@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author Игорь:
+ * Сущность для хранения данных об общении волонтёров с клиентами
+ */
 @Data
 @Entity
 public class VolunteersTalkClient {

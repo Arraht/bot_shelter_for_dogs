@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author Игорь:
+ * Сущность для хранения информации об общении клиента с ботом
+ */
 @Data
 @Entity
 public class BotTalkClient {
