@@ -14,4 +14,6 @@ public interface AnswerService {
     SendMessage sendReport(Update update);
 
     SendMessage callVolunteer(Update update);
+
+    SendMessage giveInfoSheltorForDogs(Update update);
 }

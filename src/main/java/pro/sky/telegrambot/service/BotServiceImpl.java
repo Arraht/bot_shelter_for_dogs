@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 import pro.sky.telegrambot.interfaces.BotService;
 
-import javax.persistence.Id;
-
 @Service
 public class BotServiceImpl implements BotService {
     private final AnswerService answerService;
@@ -21,21 +19,22 @@ public class BotServiceImpl implements BotService {
      * Пока через if.
      *
      * @param update
-     * @param message
      * @return Метод ответа
      */
     @Override
-    public SendMessage check(Update update, String message) {
-        if (message.equals("/start")) {
+    public SendMessage check(Update update) {
+        if (update.message().text().equals("/start")) {
             return answerService.welcome(update);
-        } else if (message.equals("/infoshelter")) {
+        } else if (update.message().text().equals("/infoshelter")) {
             return answerService.giveInfo(update);
-        } else if (message.equals("/howgetanimal")) {
+        } else if (update.message().text().equals("/howgetanimal")) {
             return answerService.giveInfoGetAnimal(update);
-        } else if (message.equals("/sendreport")) {
+        } else if (update.message().text().equals("/sendreport")) {
             return answerService.sendReport(update);
-        } else if (message.equals("/callvolunteer")) {
+        } else if (update.message().text().equals("/callvolunteer")) {
             return answerService.callVolunteer(update);
+        } else if (update.message().text().equals("/sheltordogs")) {
+            return answerService.giveInfoSheltorForDogs(update);
         }
         return new SendMessage(update.message().chat().id(), "Функция не существуеют");
     }

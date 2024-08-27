@@ -5,7 +5,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 
-
 @Service
 public class AnswerServiceImpl implements AnswerService {
     /**
@@ -16,7 +15,9 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage welcome(Update update) {
-        return new SendMessage(update.message().chat().id(), "Welcome! Пожалуйста выберите приют.");
+        SendMessage message = new SendMessage(update.message().chat().id(), "Welcome! Пожалусйта выберите приют:\n" +
+                "/sheltordogs - приют для собак\n" + "/sheltorcat - приют для кошек");
+        return message;
     }
 
     /**
@@ -62,5 +63,19 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public SendMessage callVolunteer(Update update) {
         return new SendMessage(update.message().chat().id(), "Здесь будет вызов волонтёра!");
+    }
+
+    /**
+     * Метод для выбора действия прияюта для собак
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage giveInfoSheltorForDogs(Update update) {
+        return new SendMessage(update.message().chat().id(), "Приют для собак. Что надо сделать:\n" +
+                "/infoshelter - инфор мация о приюте\n" +
+                "/howgetanimal - как взять животное\n"+
+                "/sendreport - отослать отчёт\n" +
+                "/callvolunteer - позвать волонтёра");
     }
 }
