@@ -25,9 +25,9 @@ public class BotServiceImpl implements BotService {
     public SendMessage check(Update update) {
         if (update.message().text().equals("/start")) {
             return answerService.welcome(update);
-        } else if (update.message().text().equals("/infoshelter")) {
+        } else if (update.message().text().equals("/infoshelterdogs")) {
             return answerService.giveInfo(update);
-        } else if (update.message().text().equals("/howgetanimal")) {
+        } else if (update.message().text().equals("/howgetanimaldogs")) {
             return answerService.giveInfoGetAnimal(update);
         } else if (update.message().text().equals("/sendreport")) {
             return answerService.sendReport(update);

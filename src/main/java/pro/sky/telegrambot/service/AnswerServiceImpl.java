@@ -28,7 +28,7 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfo(Update update) {
-        return new SendMessage(update.message().chat().id(), "Здесь будет инфо о приюте");
+        return new SendMessage(update.message().chat().id(), "Здесь будет инфо о приюте для собак");
     }
 
     /**
@@ -39,7 +39,7 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfoGetAnimal(Update update) {
-        return new SendMessage(update.message().chat().id(), "Здесь будет инфо о том, как взять животное");
+        return new SendMessage(update.message().chat().id(), "Здесь будет инфо о том, как взять собаку");
     }
 
     /**
@@ -73,8 +73,8 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public SendMessage giveInfoSheltorForDogs(Update update) {
         return new SendMessage(update.message().chat().id(), "Приют для собак. Что надо сделать:\n" +
-                "/infoshelter - инфор мация о приюте\n" +
-                "/howgetanimal - как взять животное\n"+
+                "/infoshelterdogs - информация о приюте\n" +
+                "/howgetanimaldogs - как взять животное\n"+
                 "/sendreport - отослать отчёт\n" +
                 "/callvolunteer - позвать волонтёра");
     }
