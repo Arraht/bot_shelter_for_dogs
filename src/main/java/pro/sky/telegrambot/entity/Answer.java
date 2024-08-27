@@ -5,6 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * @author Игорь:
+ * Сущность для хранения команд и ответов в БД
+ */
 @Data
 @Entity
 public class Answer {

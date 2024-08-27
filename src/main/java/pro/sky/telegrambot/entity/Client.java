@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * @author Игорь:
+ * Сущность для хранения данных клиентов в БД
+ */
 @Data
 @Entity
 public class Client {
