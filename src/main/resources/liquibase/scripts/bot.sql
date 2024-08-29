@@ -38,3 +38,14 @@ nameClient TEXT,
 chatId INTEGER,
 appointmentTime TIMESTAMP
 )
+-- changeset Sergei:6
+CREATE TABLE BotTalkClient(
+id SERIAL,
+name TEXT,
+address TEXT,
+address TEXT,
+workSchedule TEXT,
+directionsMap BLOB,
+securityContact TEXT,
+generalRecommendationsOnSafety TEXT
+)
