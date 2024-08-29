@@ -1,9 +1,6 @@
 package pro.sky.telegrambot.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 
@@ -15,6 +12,7 @@ public class Shelter {
     private String name;
     private String address;
     private String workSchedule;
+    @Lob
     private Byte[] directionsMap;
     private String securityContact;
     private String generalRecommendationsOnSafety;

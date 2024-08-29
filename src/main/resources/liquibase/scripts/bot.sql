@@ -39,13 +39,12 @@ chatId INTEGER,
 appointmentTime TIMESTAMP
 )
 -- changeset Sergei:6
-CREATE TABLE BotTalkClient(
+CREATE TABLE shelter(
 id SERIAL,
 name TEXT,
 address TEXT,
-address TEXT,
 workSchedule TEXT,
-directionsMap BLOB,
+directionsMap BYTEA,
 securityContact TEXT,
 generalRecommendationsOnSafety TEXT
 )
