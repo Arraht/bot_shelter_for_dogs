@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.Entity;
+package pro.sky.telegrambot.entity;
 
 import lombok.Data;
 
@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author Игорь:
+ * Сущность для хранения информации о волонтёрах в БД
+ */
 @Data
 @Entity
 public class Volunteers {
@@ -17,16 +21,15 @@ public class Volunteers {
     private Long id;
     private String name;
     private String nickName;
-    private Integer year;
     private LocalDateTime workingFirstTime;
     private LocalDateTime workingLastTime;
 
-    public Volunteers(Long id, String name, String nickName, Integer year, LocalDateTime workingFirstTime,
+    public Volunteers(Long id, String name, String nickName,
+                      LocalDateTime workingFirstTime,
                       LocalDateTime workingLastTime) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
-        this.year = year;
         this.workingFirstTime = workingFirstTime;
         this.workingLastTime = workingLastTime;
     }
