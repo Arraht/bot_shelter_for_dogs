@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.Entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
+import pro.sky.telegrambot.interfaces.ShelterService;
 import pro.sky.telegrambot.repository.ShelterRepository;
 
 /**
