@@ -8,6 +8,8 @@ import pro.sky.telegrambot.interfaces.BotService;
 
 @Service
 public class BotServiceImpl implements BotService {
+    private Long chatId;
+    Integer messageId;
     private final AnswerService answerService;
 
     public BotServiceImpl(AnswerService answerService) {
@@ -23,19 +25,21 @@ public class BotServiceImpl implements BotService {
      */
     @Override
     public SendMessage check(Update update) {
-        if (update.message().text().equals("/start")) {
-            return answerService.welcome(update);
-        } else if (update.message().text().equals("/infoshelterdogs")) {
-            return answerService.giveInfo(update);
-        } else if (update.message().text().equals("/howgetanimaldogs")) {
-            return answerService.giveInfoGetAnimal(update);
-        } else if (update.message().text().equals("/sendreport")) {
-            return answerService.sendReport(update);
-        } else if (update.message().text().equals("/callvolunteer")) {
-            return answerService.callVolunteer(update);
-        } else if (update.message().text().equals("/sheltordogs")) {
-            return answerService.giveInfoSheltorForDogs(update);
+        if (update.message() != null && update.message().text().equals("/start")) {
+            chatId = update.message().chat().id();
+            messageId = update.message().messageId();
+            return answerService.welcome(chatId);
+        } else if (update.callbackQuery().data().equals("SHELTER_DOGS")) {
+            return answerService.giveInfo(chatId);
+        } else if (update.callbackQuery().data().equals("SHELTER")) {
+            return answerService.welcome(chatId);
+        } else if (update.callbackQuery().data().equals("CALL_VOL")) {
+            return answerService.callVolunteer(chatId);
+        } else if (update.callbackQuery().data().equals("REPORT")) {
+            return answerService.sendReport(chatId);
+        } else if (update.callbackQuery().data().equals("HOW_DOGS")) {
+            return answerService.giveInfoGetAnimal(chatId);
         }
-        return new SendMessage(update.message().chat().id(), "Функция не существуеют");
+        return new SendMessage(chatId, "Функция не существуеют");
     }
 }

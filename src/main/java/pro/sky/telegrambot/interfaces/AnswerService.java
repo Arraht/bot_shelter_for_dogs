@@ -1,19 +1,16 @@
 package pro.sky.telegrambot.interfaces;
 
-import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 
 public interface AnswerService {
 
-    SendMessage welcome(Update update);
+    SendMessage welcome(Long chatId);
 
-    SendMessage giveInfo(Update update);
+    SendMessage giveInfo(Long chatId);
 
-    SendMessage giveInfoGetAnimal(Update update);
+    SendMessage giveInfoGetAnimal(Long chatId);
 
-    SendMessage sendReport(Update update);
+    SendMessage sendReport(Long chatId);
 
-    SendMessage callVolunteer(Update update);
-
-    SendMessage giveInfoSheltorForDogs(Update update);
+    SendMessage callVolunteer(Long chatId);
 }
