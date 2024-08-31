@@ -2,6 +2,8 @@ package pro.sky.telegrambot.service;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 import pro.sky.telegrambot.interfaces.BotService;
@@ -10,6 +12,9 @@ import pro.sky.telegrambot.interfaces.BotService;
 public class BotServiceImpl implements BotService {
     private Long chatId;
     Integer messageId;
+
+    private Logger logger = LoggerFactory.getLogger(BotServiceImpl.class);
+
     private final AnswerService answerService;
 
     public BotServiceImpl(AnswerService answerService) {

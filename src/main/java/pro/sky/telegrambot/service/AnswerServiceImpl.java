@@ -29,10 +29,11 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage welcome(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Welcome! Пожалусйта выберите приют");
+        SendMessage message = new SendMessage(chatId, "Добро пожаловать! Пожалуйста выберите интересующие Вас действия.");
         message.replyMarkup(createMarkupInline(
                 createButton("Приют для собак", "SHELTER_DOGS"),
-                createButton("Приют для кошек", "SHELTER_CATS")));
+                createButton("Приют для кошек", "SHELTER_CATS"))
+        );
         return message;
     }
 
