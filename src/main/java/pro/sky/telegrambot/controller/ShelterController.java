@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.Entity.Shelter;
+import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
+import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.ShelterService;
 
 @RestController
@@ -33,7 +35,11 @@ public class ShelterController {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "возвращает исключение если заполнен id в структуре запроса"
+                    description = "возвращает исключение если заполнен id в структуре запроса",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = NotNullIdException.class))
+                    )
             )
         },
             tags = "Shelter"
@@ -56,7 +62,11 @@ public class ShelterController {
                     ),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных"
+                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = NotFoundShelterByIdException.class))
+                            )
                     )
             },
             tags = "Shelter"
@@ -79,7 +89,11 @@ public class ShelterController {
                     ),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных"
+                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = NotFoundShelterByIdException.class))
+                            )
                     )
             },
             tags = "Shelter"
@@ -101,7 +115,11 @@ public class ShelterController {
                     ),
                     @ApiResponse(
                             responseCode = "404",
-                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных"
+                            description = "возвращает исключение если приют по id в структуре запроса не найден в базе данных",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = NotFoundShelterByIdException.class))
+                            )
                     )
             },
             tags = "Shelter"
