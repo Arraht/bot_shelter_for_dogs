@@ -1,14 +1,27 @@
 package pro.sky.telegrambot.service;
 
-import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Scanner;
+
 @Service
 public class AnswerServiceImpl implements AnswerService {
+    @Value("${path.to.info.shelter.dogs}")
+    private String infoShelterDogsPath;
+    @Value("${path.to.info.shelter.action.shelter.dogs}")
+    private String infoActionSheltorDogsPath;
+    private Scanner scanner;
+    private SendMessage message;
+
     private InlineKeyboardButton createButton(String textButton, String callbackData) {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(textButton);
@@ -44,13 +57,12 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfo(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Здесь будет инфо о приюте для собак");
-        message.replyMarkup(createMarkupInline(
+        File infoShelter = new File(infoShelterDogsPath);
+        return readMessage(chatId, infoShelter, infoShelterDogsPath).replyMarkup(createMarkupInline(
                 createButton("Как взять собаку", "HOW_DOGS"),
                 createButton("Отчёт", "REPORT"))
                 .addRow(createButton("Позвать волонтёра", "CALL_VOL"),
                         createButton("Приюты", "SHELTER")));
-        return message;
     }
 
     /**
@@ -61,10 +73,9 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfoGetAnimal(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Здесь будет инфо о том, как взять собаку");
-        message.replyMarkup(createMarkupInline(
+        File infoActionSheltorDogs = new File(infoActionSheltorDogsPath);
+        return readMessage(chatId, infoActionSheltorDogs, infoActionSheltorDogsPath).replyMarkup(createMarkupInline(
                 createButton("Приют для собак", "SHELTER_DOGS")));
-        return message;
     }
 
     /**
@@ -93,6 +104,25 @@ public class AnswerServiceImpl implements AnswerService {
     public SendMessage callVolunteer(Long chatId) {
         SendMessage message = new SendMessage(chatId, "Здесь будет вызов волонтёра!");
         message.replyMarkup(createMarkupInline(createButton("Приюты", "SHELTER")));
+        return message;
+    }
+
+    /**
+     * Метод для чтения из файла
+     *
+     * @param chatId
+     * @param file
+     * @param path
+     * @return
+     */
+    private SendMessage readMessage(Long chatId, File file, String path) {
+        try {
+            scanner = new Scanner(file);
+            message = new SendMessage(chatId, Files.readAllLines(Path.of(path)).toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        scanner.close();
         return message;
     }
 }
