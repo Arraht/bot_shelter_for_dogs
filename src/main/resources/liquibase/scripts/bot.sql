@@ -9,28 +9,15 @@ workingFirstTime TIMESTAMP,
 workingLastTime TIMESTAMP
 )
 -- changeset Igor:2
-CREATE TABLE answer(
-id SERIAL,
-command TEXT,
-message TEXT
-)
--- changeset Igor:3
-CREATE TABLE Client(
-id SERIAL,
-name TEXT,
-chatId INTEGER
-)
--- changeset Igor:4
 CREATE TABLE BotTalkClient(
 id SERIAL,
-answerId INTEGER,
+chat_id INTEGER,
 name TEXT,
-chatId INTEGER,
+command TEXT,
 timeSendMessage TIMESTAMP,
-initialSend TEXT,
 successOfSending BOOLEAN
 )
--- changeset Igor:5
+-- changeset Igor:3
 CREATE TABLE VolunteersTalkClient(
 id SERIAL,
 nameVolunteers TEXT,
@@ -38,7 +25,7 @@ nameClient TEXT,
 chatId INTEGER,
 appointmentTime TIMESTAMP
 )
--- changeset Sergei:6
+-- changeset Sergei:4
 CREATE TABLE shelter(
 id SERIAL,
 name TEXT,

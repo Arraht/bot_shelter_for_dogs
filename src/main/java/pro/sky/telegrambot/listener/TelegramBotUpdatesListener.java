@@ -8,21 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pro.sky.telegrambot.entity.Answer;
 import pro.sky.telegrambot.interfaces.BotService;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
-    private final Map<Long, Answer> answerMap = new HashMap<>(Map.of());
     private SendResponse response;
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
-    private Answer answer;
-    private Long chatIdOne;
     private String commandOne;
     @Autowired
     private TelegramBot telegramBot;

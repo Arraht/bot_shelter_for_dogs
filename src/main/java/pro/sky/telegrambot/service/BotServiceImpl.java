@@ -9,7 +9,7 @@ import pro.sky.telegrambot.interfaces.BotService;
 @Service
 public class BotServiceImpl implements BotService {
     private Long chatId;
-    Integer messageId;
+    private Integer messageId;
     private final AnswerService answerService;
 
     public BotServiceImpl(AnswerService answerService) {
