@@ -48,3 +48,23 @@ directionsMap BYTEA,
 securityContact TEXT,
 generalRecommendationsOnSafety TEXT
 )
+-- changeset Sergei:7
+CREATE TABLE picture(
+id SERIAL,
+filePath TEXT,
+fileSize SERIAL,
+MediaType TEXT,
+data BYTEA
+)
+-- changeset Sergei:8
+CREATE TABLE direction_to_shelter_picture(
+shelter SERIAL
+) INHERITS (picture);
+-- changeset Sergei:9
+ALTER TABLE shelter RENAME COLUMN directionsmap TO directionspicture;
+-- changeset Sergei:10
+ALTER TABLE shelter ALTER COLUMN directionspicture TYPE TEXT;
+-- changeset Sergei:11
+ALTER TABLE picture add primary key(id)
+-- changeset Sergei:12
+ALTER TABLE shelter ADD CONSTRAINT directionspicture_constraint foreign key (id) references picture

@@ -7,4 +7,6 @@ public interface ShelterService {
     Shelter find(Shelter shelter);
     Shelter edit(Shelter shelter);
     Shelter remove(Shelter shelter);
+
+    Shelter findById(Long shelterId);
 }

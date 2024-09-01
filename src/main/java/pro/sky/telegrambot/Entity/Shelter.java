@@ -12,8 +12,8 @@ public class Shelter {
     private String name;
     private String address;
     private String workSchedule;
-    @Lob
-    private Byte[] directionsMap;
+    @OneToOne
+    private DirectionToShelterPicture directionsPicture;
     private String securityContact;
     private String generalRecommendationsOnSafety;
 
@@ -29,12 +29,16 @@ public class Shelter {
         this.address = address;
     }
 
-    public Byte[] getDirectionsMap() {
-        return directionsMap;
+    public DirectionToShelterPicture getDirectionsPicture() {
+        return directionsPicture;
     }
 
-    public void setDirectionsMap(Byte[] directionsMap) {
-        this.directionsMap = directionsMap;
+    public void setDirectionsPicture(DirectionToShelterPicture directionsPicture) {
+        this.directionsPicture = directionsPicture;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getGeneralRecommendationsOnSafety() {
