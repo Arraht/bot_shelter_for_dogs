@@ -15,10 +15,10 @@ import java.util.Scanner;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
-    private File infoShelter;
-    private String info;
     @Value("${path.to.info.shelter.dogs}")
     private String infoShelterDogsPath;
+    @Value("${path.to.info.shelter.action.shelter.dogs}")
+    private String infoActionSheltorDogsPath;
     private Scanner scanner;
     private SendMessage message;
 
@@ -57,7 +57,7 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfo(Long chatId) {
-        infoShelter = new File(infoShelterDogsPath);
+        File infoShelter = new File(infoShelterDogsPath);
         return readMessage(chatId, infoShelter, infoShelterDogsPath).replyMarkup(createMarkupInline(
                 createButton("Как взять собаку", "HOW_DOGS"),
                 createButton("Отчёт", "REPORT"))
@@ -73,10 +73,9 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage giveInfoGetAnimal(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Здесь будет инфо о том, как взять собаку");
-        message.replyMarkup(createMarkupInline(
+        File infoActionSheltorDogs = new File(infoActionSheltorDogsPath);
+        return readMessage(chatId, infoActionSheltorDogs, infoActionSheltorDogsPath).replyMarkup(createMarkupInline(
                 createButton("Приют для собак", "SHELTER_DOGS")));
-        return message;
     }
 
     /**
