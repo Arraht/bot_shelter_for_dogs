@@ -1,13 +1,14 @@
 package pro.sky.telegrambot.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "direction_to_shelter_picture")
 public class DirectionToShelterPicture extends Picture {
 
     @OneToOne
+    @JoinColumn(name = "shelter_id")
     private Shelter shelter;
 
     public DirectionToShelterPicture() {

@@ -68,3 +68,25 @@ ALTER TABLE shelter ALTER COLUMN directionspicture TYPE TEXT;
 ALTER TABLE picture add primary key(id)
 -- changeset Sergei:12
 ALTER TABLE shelter ADD CONSTRAINT directionspicture_constraint foreign key (id) references picture
+-- changeset Sergei:13
+ALTER TABLE shelter RENAME COLUMN directionspicture TO directions_picture_id;
+-- changeset Sergei:14
+ALTER TABLE shelter RENAME COLUMN generalrecommendationsonsafety TO general_recommendations_on_safety;
+-- changeset Sergei:15
+ALTER TABLE shelter RENAME COLUMN securitycontact TO security_contact;
+-- changeset Sergei:16
+ALTER TABLE shelter RENAME COLUMN workschedule TO work_schedule;
+-- changeset Sergei:17
+ALTER TABLE shelter DROP CONSTRAINT directionspicture_constraint;
+-- changeset Sergei:18
+ALTER TABLE shelter add primary key(id)
+-- changeset Sergei:19
+ALTER TABLE shelter DROP COLUMN directions_picture_id;
+-- changeset Sergei:20
+ALTER TABLE Direction_To_Shelter_Picture RENAME COLUMN shelter TO shelter_id;
+-- changeset Sergei:21
+ALTER TABLE picture RENAME COLUMN mediatype TO media_type;
+-- changeset Sergei:22
+ALTER TABLE picture RENAME COLUMN filepath TO file_path;
+-- changeset Sergei:23
+ALTER TABLE picture RENAME COLUMN filesize TO file_size;

@@ -12,13 +12,18 @@ public class Shelter {
     private String name;
     private String address;
     private String workSchedule;
-    @OneToOne
-    private DirectionToShelterPicture directionsPicture;
     private String securityContact;
     private String generalRecommendationsOnSafety;
 
-    public Shelter() {
+    public Shelter() {}
 
+    public Shelter(Long id, String name, String address, String workSchedule, String securityContact, String generalRecommendationsOnSafety) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.workSchedule = workSchedule;
+        this.securityContact = securityContact;
+        this.generalRecommendationsOnSafety = generalRecommendationsOnSafety;
     }
 
     public String getAddress() {
@@ -27,14 +32,6 @@ public class Shelter {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public DirectionToShelterPicture getDirectionsPicture() {
-        return directionsPicture;
-    }
-
-    public void setDirectionsPicture(DirectionToShelterPicture directionsPicture) {
-        this.directionsPicture = directionsPicture;
     }
 
     public void setId(Long id) {
@@ -75,6 +72,18 @@ public class Shelter {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Shelter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", generalRecommendationsOnSafety='" + generalRecommendationsOnSafety + '\'' +
+                ", securityContact='" + securityContact + '\'' +
+                ", workSchedule='" + workSchedule + '\'' +
+                '}';
     }
 
     @Override

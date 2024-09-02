@@ -1,15 +1,12 @@
 package pro.sky.telegrambot.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Arrays;
+import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
+@MappedSuperclass
 public abstract class Picture {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String filePath;
     private long fileSize;

@@ -2,38 +2,36 @@ package pro.sky.telegrambot.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pro.sky.telegrambot.Entity.DirectionToShelterPicture;
 import pro.sky.telegrambot.Entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundPictureByShelterIdException;
 import pro.sky.telegrambot.interfaces.DirectionToShelterPictureService;
+import pro.sky.telegrambot.interfaces.PictureService;
 import pro.sky.telegrambot.interfaces.ShelterService;
 import pro.sky.telegrambot.repository.DirectionToShelterPictureRepository;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static io.swagger.v3.core.util.AnnotationsUtils.getExtensions;
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 public class DirectionToShelterPictureServiceImpl implements DirectionToShelterPictureService {
 
     private final DirectionToShelterPictureRepository directionToShelterPictureRepository;
     private final ShelterService shelterService;
+    private final PictureService pictureService;
 
     private Logger logger = LoggerFactory.getLogger(DirectionToShelterPictureServiceImpl.class);
 
-    public DirectionToShelterPictureServiceImpl(DirectionToShelterPictureRepository directionToShelterPictureRepository, ShelterService shelterService) {
+    public DirectionToShelterPictureServiceImpl(
+            DirectionToShelterPictureRepository directionToShelterPictureRepository
+            , ShelterService shelterService
+            , PictureService pictureService) {
         this.directionToShelterPictureRepository = directionToShelterPictureRepository;
         this.shelterService = shelterService;
+        this.pictureService = pictureService;
     }
-
-    @Value("${path.to.pictures.folder}")
-    private String picturesDir;
 
     private DirectionToShelterPicture findOrCreatePicture(Long shelterId) {
         logger.info("Was invoked method findOrCreatePicture shelter : {}", shelterId);
@@ -63,25 +61,9 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
         logger.info("Was invoked method upload : shelterId={} directionToShelterPicture.getName()={}", shelterId, directionToShelterPictureFile.getName());
 
         Shelter shelter = shelterService.findById(shelterId);
-        String filName = shelter + "." + getExtensions(directionToShelterPictureFile.getOriginalFilename());
-        Path filePath = Path.of(picturesDir, filName);
-        logger.debug("filePath={}",filePath);
-        Files.createDirectories(filePath.getParent());
-        Files.deleteIfExists(filePath);
+        Path filePath = pictureService.uploadPicture(shelter.getId(), directionToShelterPictureFile);
 
-        try (
-                InputStream is = directionToShelterPictureFile.getInputStream();
-                OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
-                BufferedInputStream bis = new BufferedInputStream(is, 1024);
-                BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
-        ) {
-            bis.transferTo(bos);
-        } catch (IOException e) {
-            logger.error("An error occurred while transferring the file. {}{} , message", picturesDir,filName,e.getMessage());
-            throw e;
-        }
-
-        DirectionToShelterPicture picture = find(shelterId);
+        DirectionToShelterPicture picture = findOrCreatePicture(shelterId);
 
         picture.setShelter(shelter);
         picture.setFilePath(filePath.toString());
@@ -92,7 +74,5 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
         logger.info("Picture was saved.");
     }
 
-    private String getExtensions(String fileName) {
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
-    }
+
 }

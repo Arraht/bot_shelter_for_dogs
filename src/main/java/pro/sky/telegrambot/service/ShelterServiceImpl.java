@@ -100,6 +100,9 @@ public class ShelterServiceImpl implements ShelterService {
      */
     @Override
     public Shelter findById(Long shelterId) {
-        return shelterRepository.findById(shelterId).orElseThrow(() -> new NotFoundShelterByIdException("Приют не найден по ID!"));
+        logger.info("Was invoked method findById : shelterId={}", shelterId);
+        Shelter shelter = shelterRepository.findById(shelterId).orElseThrow(() -> new NotFoundShelterByIdException("Приют не найден по ID!"));
+        logger.info("Was invoked method findById : shelter={}", shelter);
+        return shelter;
     }
 }
