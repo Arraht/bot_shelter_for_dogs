@@ -27,6 +27,9 @@ public class Client {
         this.chatId = chatId;
     }
 
+    public Client() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

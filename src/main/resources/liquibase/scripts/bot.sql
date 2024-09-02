@@ -12,20 +12,20 @@ workingLastTime TIMESTAMP
 CREATE TABLE answer(
 id SERIAL,
 command TEXT,
-message TEXT
+chat_id INTEGER
 )
 -- changeset Igor:3
 CREATE TABLE Client(
 id SERIAL,
 name TEXT,
-chatId INTEGER
+chat_id INTEGER
 )
 -- changeset Igor:4
 CREATE TABLE BotTalkClient(
 id SERIAL,
 answerId INTEGER,
 name TEXT,
-chatId INTEGER,
+chat_id INTEGER,
 timeSendMessage TIMESTAMP,
 initialSend TEXT,
 successOfSending BOOLEAN
@@ -35,7 +35,7 @@ CREATE TABLE VolunteersTalkClient(
 id SERIAL,
 nameVolunteers TEXT,
 nameClient TEXT,
-chatId INTEGER,
+chat_id INTEGER,
 appointmentTime TIMESTAMP
 )
 -- changeset Sergei:6
