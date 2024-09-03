@@ -2,6 +2,8 @@ package pro.sky.telegrambot.service;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 import pro.sky.telegrambot.interfaces.BotService;
@@ -9,6 +11,7 @@ import pro.sky.telegrambot.interfaces.ClientService;
 
 @Service
 public class BotServiceImpl implements BotService {
+
     private final AnswerService answerService;
     private final ClientService clientService;
 

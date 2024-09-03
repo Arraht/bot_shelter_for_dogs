@@ -12,13 +12,18 @@ public class Shelter {
     private String name;
     private String address;
     private String workSchedule;
-    @Lob
-    private Byte[] directionsMap;
     private String securityContact;
     private String generalRecommendationsOnSafety;
 
-    public Shelter() {
+    public Shelter() {}
 
+    public Shelter(Long id, String name, String address, String workSchedule, String securityContact, String generalRecommendationsOnSafety) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.workSchedule = workSchedule;
+        this.securityContact = securityContact;
+        this.generalRecommendationsOnSafety = generalRecommendationsOnSafety;
     }
 
     public String getAddress() {
@@ -29,12 +34,8 @@ public class Shelter {
         this.address = address;
     }
 
-    public Byte[] getDirectionsMap() {
-        return directionsMap;
-    }
-
-    public void setDirectionsMap(Byte[] directionsMap) {
-        this.directionsMap = directionsMap;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getGeneralRecommendationsOnSafety() {
@@ -71,6 +72,18 @@ public class Shelter {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Shelter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", generalRecommendationsOnSafety='" + generalRecommendationsOnSafety + '\'' +
+                ", securityContact='" + securityContact + '\'' +
+                ", workSchedule='" + workSchedule + '\'' +
+                '}';
     }
 
     @Override

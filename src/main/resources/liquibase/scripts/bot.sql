@@ -43,8 +43,24 @@ CREATE TABLE shelter(
 id SERIAL,
 name TEXT,
 address TEXT,
-workSchedule TEXT,
-directionsMap BYTEA,
-securityContact TEXT,
-generalRecommendationsOnSafety TEXT
+work_schedule TEXT,
+security_contact TEXT,
+general_recommendations_on_safety TEXT
 )
+-- changeset Sergei:7
+CREATE TABLE picture(
+id SERIAL,
+file_path TEXT,
+file_size SERIAL,
+media_type TEXT,
+data BYTEA
+)
+-- changeset Sergei:8
+CREATE TABLE direction_to_shelter_picture(
+shelter_id SERIAL
+) INHERITS (picture);
+-- changeset Sergei:9
+ALTER TABLE picture add primary key(id)
+-- changeset Sergei:10
+ALTER TABLE shelter add primary key(id)
+

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.Entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
+import pro.sky.telegrambot.interfaces.ShelterService;
 import pro.sky.telegrambot.repository.ShelterRepository;
 
 /**
@@ -19,6 +20,7 @@ public class ShelterServiceImpl implements ShelterService {
      * <p>репозиторий<p/>
      */
     private final ShelterRepository shelterRepository;
+
     /**
      * <p>логирование работы класса<p/>
      */
@@ -29,7 +31,6 @@ public class ShelterServiceImpl implements ShelterService {
     public ShelterServiceImpl(ShelterRepository shelterRepository) {
         this.shelterRepository = shelterRepository;
     }
-
     /**
      * Добавляет в базу данных переданный приют
      *
@@ -89,5 +90,19 @@ public class ShelterServiceImpl implements ShelterService {
         Shelter foundedShelter = find(shelter);
         shelterRepository.deleteById(foundedShelter.getId());
         return foundedShelter;
+    }
+
+    /**
+     * Ищет в базе данных переданный приют по id и удалает объект из базы данных.
+     *
+     * @param shelterId структура приют
+     * @throws NotFoundShelterByIdException возращают ошибку если не найдет
+     */
+    @Override
+    public Shelter findById(Long shelterId) {
+        logger.info("Was invoked method findById : shelterId={}", shelterId);
+        Shelter shelter = shelterRepository.findById(shelterId).orElseThrow(() -> new NotFoundShelterByIdException("Приют не найден по ID!"));
+        logger.info("Was invoked method findById : shelter={}", shelter);
+        return shelter;
     }
 }

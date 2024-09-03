@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.service;
+package pro.sky.telegrambot.interfaces;
 
 import pro.sky.telegrambot.Entity.Shelter;
 
@@ -7,4 +7,6 @@ public interface ShelterService {
     Shelter find(Shelter shelter);
     Shelter edit(Shelter shelter);
     Shelter remove(Shelter shelter);
+
+    Shelter findById(Long shelterId);
 }
