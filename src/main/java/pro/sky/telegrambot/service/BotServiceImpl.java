@@ -7,18 +7,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.AnswerService;
 import pro.sky.telegrambot.interfaces.BotService;
+import pro.sky.telegrambot.interfaces.ClientService;
 
 @Service
 public class BotServiceImpl implements BotService {
-    private Long chatId;
-    Integer messageId;
-
-    private Logger logger = LoggerFactory.getLogger(BotServiceImpl.class);
 
     private final AnswerService answerService;
+    private final ClientService clientService;
 
-    public BotServiceImpl(AnswerService answerService) {
+    public BotServiceImpl(AnswerService answerService, ClientService clientService) {
         this.answerService = answerService;
+        this.clientService = clientService;
     }
 
     /**
@@ -31,20 +30,39 @@ public class BotServiceImpl implements BotService {
     @Override
     public SendMessage check(Update update) {
         if (update.message() != null && update.message().text().equals("/start")) {
-            chatId = update.message().chat().id();
-            messageId = update.message().messageId();
-            return answerService.welcome(chatId);
+            clientService.checkClient(null, update.message().chat().firstName(), update.message().chat().id());
+            check(update.message().chat().id(), update.message().text());
+            return answerService.welcome(update.message().chat().id());
         } else if (update.callbackQuery().data().equals("SHELTER_DOGS")) {
-            return answerService.giveInfo(chatId);
+            check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
+            return answerService.giveInfo(update.callbackQuery().message().chat().id());
         } else if (update.callbackQuery().data().equals("SHELTER")) {
-            return answerService.welcome(chatId);
+            check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
+            return answerService.welcome(update.callbackQuery().message().chat().id());
         } else if (update.callbackQuery().data().equals("CALL_VOL")) {
-            return answerService.callVolunteer(chatId);
+            check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
+            return answerService.callVolunteer(update.callbackQuery().message().chat().id());
         } else if (update.callbackQuery().data().equals("REPORT")) {
-            return answerService.sendReport(chatId);
+            check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
+            return answerService.sendReport(update.callbackQuery().message().chat().id());
         } else if (update.callbackQuery().data().equals("HOW_DOGS")) {
-            return answerService.giveInfoGetAnimal(chatId);
+            check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
+            return answerService.giveInfoGetAnimal(update.callbackQuery().message().chat().id());
         }
-        return new SendMessage(chatId, "Функция не существуеют");
+        return new SendMessage(update.message().chat().id(), "Функция не существуеют");
+    }
+
+    /**
+     * Метод для обнвления записи в БД
+     *
+     * @param chatId
+     * @param command
+     */
+    private void check(Long chatId, String command) {
+        if (answerService.findAnswerByChatId(chatId) != null) {
+            answerService.editAnswer(chatId, command);
+        } else {
+            answerService.createAnswer(null, command, chatId);
+        }
     }
 }

@@ -15,13 +15,13 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long chatId;
     private String command;
-    private String message;
 
-    public Answer(Long id, String command, String message) {
+    public Answer(Long id, String command, Long chatId) {
         this.id = id;
+        this.chatId = chatId;
         this.command = command;
-        this.message = message;
     }
 
     public Answer() {
@@ -41,6 +41,6 @@ public class Answer {
     }
 
     public String toString() {
-        return "Id запроса: " + this.id + "; Вопрос-команда: " + this.command + "; ответ: " + this.message;
+        return "Id запроса: " + this.id + "; Вопрос-команда: " + this.command;
     }
 }
