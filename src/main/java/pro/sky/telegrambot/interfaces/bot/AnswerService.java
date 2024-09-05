@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.interfaces;
+package pro.sky.telegrambot.interfaces.bot;
 
 import com.pengrad.telegrambot.request.SendMessage;
 import pro.sky.telegrambot.entity.Answer;

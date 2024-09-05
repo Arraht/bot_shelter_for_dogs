@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.interfaces;
+package pro.sky.telegrambot.interfaces.bot;
 
 import pro.sky.telegrambot.entity.Client;
 

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Answer;
-import pro.sky.telegrambot.interfaces.BotService;
+import pro.sky.telegrambot.interfaces.bot.BotService;
 
 import java.util.HashMap;
 import java.util.List;
