@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.service;
+package pro.sky.telegrambot.service.shelter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,10 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import pro.sky.telegrambot.entity.DirectionToShelterPicture;
 import pro.sky.telegrambot.entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundPictureByShelterIdException;
-import pro.sky.telegrambot.interfaces.DirectionToShelterPictureService;
-import pro.sky.telegrambot.interfaces.PictureService;
-import pro.sky.telegrambot.interfaces.ShelterService;
-import pro.sky.telegrambot.repository.DirectionToShelterPictureRepository;
+import pro.sky.telegrambot.interfaces.shelter.DirectionToShelterPictureService;
+import pro.sky.telegrambot.interfaces.shelter.PictureService;
+import pro.sky.telegrambot.interfaces.shelter.ShelterService;
+import pro.sky.telegrambot.repository.shelter.DirectionToShelterPictureRepository;
 
 import java.io.*;
 import java.nio.file.Path;

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pro.sky.telegrambot.entity.DirectionToShelterPicture;
-import pro.sky.telegrambot.interfaces.DirectionToShelterPictureService;
+import pro.sky.telegrambot.interfaces.shelter.DirectionToShelterPictureService;
 
 import java.io.IOException;
 import java.io.InputStream;
