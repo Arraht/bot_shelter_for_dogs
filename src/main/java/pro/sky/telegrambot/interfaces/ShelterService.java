@@ -1,6 +1,6 @@
 package pro.sky.telegrambot.interfaces;
 
-import pro.sky.telegrambot.Entity.Shelter;
+import pro.sky.telegrambot.entity.Shelter;
 
 public interface ShelterService {
     Shelter add(Shelter shelter);

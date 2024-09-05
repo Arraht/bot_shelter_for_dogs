@@ -1,7 +1,7 @@
 package pro.sky.telegrambot.interfaces;
 
 import org.springframework.web.multipart.MultipartFile;
-import pro.sky.telegrambot.Entity.DirectionToShelterPicture;
+import pro.sky.telegrambot.entity.DirectionToShelterPicture;
 
 import java.io.IOException;
 
