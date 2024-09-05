@@ -1,6 +1,10 @@
-package pro.sky.telegrambot.Entity;
+package pro.sky.telegrambot.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
 import java.util.Objects;
 
 @Entity

@@ -3,7 +3,7 @@ package pro.sky.telegrambot.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pro.sky.telegrambot.Entity.Shelter;
+import pro.sky.telegrambot.entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.ShelterService;

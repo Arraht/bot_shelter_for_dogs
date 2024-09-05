@@ -2,7 +2,7 @@ package pro.sky.telegrambot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pro.sky.telegrambot.Entity.DirectionToShelterPicture;
+import pro.sky.telegrambot.entity.DirectionToShelterPicture;
 
 public interface DirectionToShelterPictureRepository extends JpaRepository<DirectionToShelterPicture, Long> {
 
