@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.service;
+package pro.sky.telegrambot.service.shelter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
-import pro.sky.telegrambot.interfaces.ShelterService;
-import pro.sky.telegrambot.repository.ShelterRepository;
+import pro.sky.telegrambot.interfaces.shelter.ShelterService;
+import pro.sky.telegrambot.repository.shelter.ShelterRepository;
 
 /**
  * <p>класс Приют для обработки данных с фронта по приютам</p>

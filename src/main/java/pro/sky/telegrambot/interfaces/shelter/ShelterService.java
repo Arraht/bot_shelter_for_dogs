@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.interfaces;
+package pro.sky.telegrambot.interfaces.shelter;
 
 import pro.sky.telegrambot.entity.Shelter;
 

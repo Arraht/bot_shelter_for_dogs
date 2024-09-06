@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.service;
+package pro.sky.telegrambot.service.bot;
 
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
@@ -6,8 +6,8 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Answer;
-import pro.sky.telegrambot.interfaces.AnswerService;
-import pro.sky.telegrambot.repository.AnswerRepository;
+import pro.sky.telegrambot.interfaces.bot.AnswerService;
+import pro.sky.telegrambot.repository.bot.AnswerRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,14 +99,14 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     /**
-     * Метод приетствия
+     * Метод приветствия
      *
      * @param chatId
      * @return
      */
     @Override
     public SendMessage welcome(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Добро пожаловать! Пожалуйста выберите интересующие Вас действия.");
+        SendMessage message = new SendMessage(chatId, "Добро пожаловать! Пожалуйста выберите приют:");
         message.replyMarkup(createMarkupInline(
                 createButton("Приют для собак", "SHELTER_DOGS"),
                 createButton("Приют для кошек", "SHELTER_CATS"))

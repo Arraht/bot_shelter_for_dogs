@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.entity.Shelter;
 import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
-import pro.sky.telegrambot.interfaces.ShelterService;
+import pro.sky.telegrambot.interfaces.shelter.ShelterService;
 
 @RestController
 @RequestMapping("/shelter")

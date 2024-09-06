@@ -1,11 +1,11 @@
-package pro.sky.telegrambot.service;
+package pro.sky.telegrambot.service.shelter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pro.sky.telegrambot.interfaces.PictureService;
+import pro.sky.telegrambot.interfaces.shelter.PictureService;
 
 import java.io.*;
 import java.nio.file.Files;
