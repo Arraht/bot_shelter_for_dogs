@@ -116,6 +116,9 @@ public class ShelterServiceImplTests {
 
         Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
         Assertions.assertEquals(EXPEPTED_SHELTER.getName(), TEST_SHELTER.getName());
+        Assertions.assertEquals(EXPEPTED_SHELTER.toString(), TEST_SHELTER.toString());
+        Assertions.assertEquals(EXPEPTED_SHELTER.hashCode(), TEST_SHELTER.hashCode());
+        Assertions.assertTrue(EXPEPTED_SHELTER.equals(TEST_SHELTER));
     }
 
     /**
