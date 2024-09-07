@@ -31,11 +31,13 @@ public class ShelterServiceImpl implements ShelterService {
     public ShelterServiceImpl(ShelterRepository shelterRepository) {
         this.shelterRepository = shelterRepository;
     }
+
     /**
      * Добавляет в базу данных переданный приют
      *
      * @param shelter структура приют
      * @exception NotNullIdException если в переданном приюте заполнен id
+     * @return возвращает добавленный приют
      */
     @Override
     public Shelter add(Shelter shelter) {
@@ -52,6 +54,7 @@ public class ShelterServiceImpl implements ShelterService {
      *
      * @param shelter структура приют
      * @exception NotFoundShelterByIdException если приют не найден по переданному id
+     * @return возвращает найденный приют
      */
     @Override
     public Shelter find(Shelter shelter) {
@@ -70,6 +73,7 @@ public class ShelterServiceImpl implements ShelterService {
      *
      * @param shelter структура приют
      * @see  #find(Shelter)
+     * @return возвращает отредактированный приют
      */
     @Override
     public Shelter edit(Shelter shelter) {
@@ -83,6 +87,7 @@ public class ShelterServiceImpl implements ShelterService {
      *
      * @param shelter структура приют
      * @see  #find(Shelter)
+     * @return возвращает удаленный приют
      */
     @Override
     public Shelter remove(Shelter shelter) {
@@ -97,6 +102,7 @@ public class ShelterServiceImpl implements ShelterService {
      *
      * @param shelterId структура приют
      * @throws NotFoundShelterByIdException возращают ошибку если не найдет
+     * @return возвращает найденный по идентификатору приют
      */
     @Override
     public Shelter findById(Long shelterId) {

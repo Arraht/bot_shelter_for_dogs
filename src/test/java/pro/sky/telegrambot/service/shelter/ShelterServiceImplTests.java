@@ -30,6 +30,7 @@ public class ShelterServiceImplTests {
     @Test
     public void shouldBeReturnNotFoundShelterByIdException() {
         Mockito.when(shelterRepository.findById(-1l)).thenReturn(Optional.ofNullable(null));
+
         Assertions.assertThrows(NotFoundShelterByIdException.class, ()->shelterService.findById(-1l));
     }
 
