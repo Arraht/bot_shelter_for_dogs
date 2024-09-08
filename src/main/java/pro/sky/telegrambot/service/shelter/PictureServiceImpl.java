@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.shelter.PictureService;
 
@@ -42,6 +43,7 @@ public class PictureServiceImpl implements PictureService {
      *
      * @return путь к файлу
      */
+
     @Override
     public Path uploadPicture(Long id, MultipartFile file) throws IOException {
 
@@ -64,6 +66,7 @@ public class PictureServiceImpl implements PictureService {
         }
         return filePath;
     }
+
     /**
      * возращает расширение из имени файла
      *

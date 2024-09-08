@@ -17,6 +17,7 @@ import java.io.*;
 import java.nio.file.Path;
 
 
+
 /**
  * <p>класс DirectionToShelterPictureServiceImpl служит
  * для обработки картинок показывающих направление к приюту</p>
@@ -30,9 +31,11 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
     private final ShelterService shelterService;
     private final PictureService pictureService;
 
+
     /**
      * <p>логирование работы класса<p/>
      */
+
     private Logger logger = LoggerFactory.getLogger(DirectionToShelterPictureServiceImpl.class);
 
     public DirectionToShelterPictureServiceImpl(
@@ -44,12 +47,14 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
         this.pictureService = pictureService;
     }
 
+
     /**
      * Ищет по идентификатору приюта картину. если ее нет то создает новую
      *
      * @param shelterId идентификатор приюта
      * @return возвращает найденную или созданную картинку для направления к приюту
      */
+
     private DirectionToShelterPicture findOrCreatePicture(Long shelterId) {
         logger.info("Was invoked method findOrCreatePicture shelter : {}", shelterId);
         DirectionToShelterPicture directionToShelterPicture = directionToShelterPictureRepository.findByShelterId(shelterId);
@@ -60,6 +65,7 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
         logger.debug("Picture, with shelterId = {}, {}", shelterId, directionToShelterPicture);
         return directionToShelterPicture;
     }
+
 
     /**
      * Ищет по идентификатору приюта картину.
