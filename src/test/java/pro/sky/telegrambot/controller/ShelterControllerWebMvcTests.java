@@ -143,48 +143,4 @@ public class ShelterControllerWebMvcTests {
         ;
     }
 
-    /*@Test
-    public void deleteStudentById() throws Exception {
-        Mockito.when(studentService.deleteStudent(studentTest1.getId())).thenReturn(studentTest1);
-        mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/student/" + studentTest1.getId() ) )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$").isMap())
-                .andExpect(jsonPath("$.id").value(studentTest1.getId()))
-        ;
-    }
-
-    @Test
-    public void getStudentsByAge() throws Exception {
-        Collection<Student> students = new HashSet<>();
-        students.add(studentTest1);
-
-        Mockito.when(studentService.getStudentsByAge(studentTest1.getAge())).thenReturn(students);
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/student/by-age?age=" + studentTest1.getAge() ) )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$").isArray())
-        ;
-    }
-
-    @Test
-    public void getStudentsBetweenAge() throws Exception {
-        Collection<Student> students = new HashSet<>();
-        students.add(studentTest1);
-
-        Mockito.when(studentService.getStudentsBetweenAge(1,100)).thenReturn(students);
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/student/between-age?minAge=" + 1
-                                + "&maxAge=" + 100 ))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").exists())
-                .andExpect(jsonPath("$").isArray())
-        ;
-    }*/
-
 }
