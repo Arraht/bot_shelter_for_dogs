@@ -64,7 +64,7 @@ public class ShelterServiceImpl implements ShelterService {
             logger.error("An error occurred because shelter not found by id={}", shelter.getId());
             throw new NotFoundShelterByIdException("Приют не найден по ID!");
         }
-        logger.debug("faculty={}", shelter);
+        logger.debug("shelter={}", shelter);
         return foundedShelter;
     }
 
