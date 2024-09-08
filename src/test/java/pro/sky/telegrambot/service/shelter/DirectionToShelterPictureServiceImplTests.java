@@ -2,6 +2,7 @@ package pro.sky.telegrambot.service.shelter;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -42,6 +43,31 @@ public class DirectionToShelterPictureServiceImplTests {
     private DirectionToShelterPicture TEST_PICTURE = new DirectionToShelterPicture();
     private DirectionToShelterPicture EXPECTED_PICTURE = new DirectionToShelterPicture();
 
+    @BeforeEach
+    void init(){
+        TEST_PICTURE.setId(1l);
+        TEST_PICTURE.setShelter(null);
+        TEST_PICTURE.setData( new byte[]{} );
+        TEST_PICTURE.setFilePath(null);
+        TEST_PICTURE.setFileSize(0);
+        TEST_PICTURE.setMediaType(null);
+    }
+
+    private void assertsObject(DirectionToShelterPicture expected, DirectionToShelterPicture actual) {
+
+        Assertions.assertEquals(expected.getId(),actual.getId());
+        Assertions.assertEquals(expected.getShelter(),actual.getShelter());
+        Assertions.assertEquals(expected.getData(),actual.getData());
+        Assertions.assertEquals(expected.getFilePath(),actual.getFilePath());
+        Assertions.assertEquals(expected.getFileSize(),actual.getFileSize());
+        Assertions.assertEquals(expected.getMediaType(),actual.getMediaType());
+
+        Assertions.assertEquals(expected.toString(), actual.toString());
+        Assertions.assertEquals(expected.hashCode(), actual.hashCode());
+        Assertions.assertTrue(expected.equals(actual));
+
+    }
+
     /**
      * Ищет по идентификатору приюта картину. и получает ошибку когда не находт
      * @Note для тестирования используется Mockito
@@ -61,7 +87,7 @@ public class DirectionToShelterPictureServiceImplTests {
     public void shouldBeFind() {
         Mockito.when(directionToShelterPictureRepository.findByShelterId(1l)).thenReturn(TEST_PICTURE);
         EXPECTED_PICTURE = directionToShelterPictureService.find(1l);
-        Assertions.assertEquals(EXPECTED_PICTURE, TEST_PICTURE);
+        assertsObject(EXPECTED_PICTURE, TEST_PICTURE);
     }
 
     /**

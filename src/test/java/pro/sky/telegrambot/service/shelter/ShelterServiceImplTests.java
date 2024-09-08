@@ -29,12 +29,30 @@ public class ShelterServiceImplTests {
     private final Shelter TEST_SHELTER = new Shelter();
     private final Shelter TEST_SHELTER_WITH_NULL_ID = new Shelter();
 
-    private Shelter ACTUAL_SHELTER = new Shelter();
     private Shelter EXPEPTED_SHELTER = new Shelter();
 
     @BeforeEach
     void init_shelter(){
         TEST_SHELTER.setId(1l);
+        TEST_SHELTER.setAddress("TEST_address");
+        TEST_SHELTER.setName("TEST_name");
+        TEST_SHELTER.setWorkSchedule("TES_schedule");
+        TEST_SHELTER.setSecurityContact("+7-9***");
+        TEST_SHELTER.setGeneralRecommendationsOnSafety("TEST_recommendation");
+    }
+
+    private void assertsObject(Shelter expected, Shelter actual) {
+
+        Assertions.assertEquals(expected.getId(),actual.getId());
+        Assertions.assertEquals(expected.getAddress(),actual.getAddress());
+        Assertions.assertEquals(expected.getName(),actual.getName());
+        Assertions.assertEquals(expected.getWorkSchedule(),actual.getWorkSchedule());
+        Assertions.assertEquals(expected.getSecurityContact(),actual.getSecurityContact());
+        Assertions.assertEquals(expected.getGeneralRecommendationsOnSafety(),actual.getGeneralRecommendationsOnSafety());
+
+        Assertions.assertEquals(expected.toString(), actual.toString());
+        Assertions.assertEquals(expected.hashCode(), actual.hashCode());
+        Assertions.assertTrue(expected.equals(actual));
 
     }
 
@@ -57,7 +75,7 @@ public class ShelterServiceImplTests {
     public void shouldBeАFindByIdShelter() {
         Mockito.when(shelterRepository.findById(TEST_SHELTER.getId())).thenReturn(Optional.ofNullable(TEST_SHELTER));
         EXPEPTED_SHELTER = shelterService.findById(TEST_SHELTER.getId());
-        Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
+        assertsObject(EXPEPTED_SHELTER, TEST_SHELTER);
     }
 
     /**
@@ -68,7 +86,7 @@ public class ShelterServiceImplTests {
     public void shouldBeAddShelter() {
         Mockito.when(shelterRepository.save(TEST_SHELTER_WITH_NULL_ID)).thenReturn(TEST_SHELTER);
         EXPEPTED_SHELTER = shelterService.add(TEST_SHELTER_WITH_NULL_ID);
-        Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
+        assertsObject(EXPEPTED_SHELTER, TEST_SHELTER);
     }
 
     /**
@@ -87,7 +105,7 @@ public class ShelterServiceImplTests {
     public void shouldBeFindShelter() {
         Mockito.when(shelterRepository.findById(TEST_SHELTER.getId())).thenReturn(Optional.of(TEST_SHELTER));
         EXPEPTED_SHELTER = shelterService.find(TEST_SHELTER);
-        Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
+        assertsObject(EXPEPTED_SHELTER, TEST_SHELTER);
     }
 
     /**
@@ -114,11 +132,7 @@ public class ShelterServiceImplTests {
 
         EXPEPTED_SHELTER = shelterService.edit(TEST_SHELTER);
 
-        Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
-        Assertions.assertEquals(EXPEPTED_SHELTER.getName(), TEST_SHELTER.getName());
-        Assertions.assertEquals(EXPEPTED_SHELTER.toString(), TEST_SHELTER.toString());
-        Assertions.assertEquals(EXPEPTED_SHELTER.hashCode(), TEST_SHELTER.hashCode());
-        Assertions.assertTrue(EXPEPTED_SHELTER.equals(TEST_SHELTER));
+        assertsObject(EXPEPTED_SHELTER, TEST_SHELTER);
     }
 
     /**
@@ -130,7 +144,7 @@ public class ShelterServiceImplTests {
         TEST_SHELTER.setId(1L);
         Mockito.when(shelterRepository.findById(TEST_SHELTER.getId())).thenReturn(Optional.of(TEST_SHELTER));
         EXPEPTED_SHELTER = shelterService.remove(TEST_SHELTER);
-        Assertions.assertEquals(EXPEPTED_SHELTER, TEST_SHELTER);
+        assertsObject(EXPEPTED_SHELTER, TEST_SHELTER);
     }
 
 }
