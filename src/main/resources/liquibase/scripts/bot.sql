@@ -63,4 +63,30 @@ shelter_id SERIAL
 ALTER TABLE picture add primary key(id)
 -- changeset Sergei:10
 ALTER TABLE shelter add primary key(id)
-
+-- changeset Sergei:11
+CREATE TABLE pet (
+     id          BIGSERIAL    primary key
+    ,class_pet   TEXT
+    ,alias       TEXT
+    ,age         SMALLINT     check(age >= 0)
+    ,sex         BOOLEAN
+    ,weight      NUMERIC(9,3) check(weight >= 0.0)
+    ,diet        TEXT
+    ,description TEXT
+);
+-- changeset Sergei:12
+CREATE TABLE report(
+     id                     BIGSERIAL    primary key
+    ,time_created           TIMESTAMP
+    ,time_received_text     TIMESTAMP
+    ,text_from_client       TEXT
+    ,time_received_photo    TIMESTAMP
+    ,accepted               BOOLEAN
+    ,volunteer_id           BIGSERIAL
+    ,client_id              BIGSERIAL
+    ,pet_id                 BIGSERIAL
+);
+-- changeset Sergei:13
+CREATE TABLE pet_photo(
+    pet_id      BIGSERIAL
+)   INHERITS (picture);
