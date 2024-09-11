@@ -82,7 +82,7 @@ public class DirectionToShelterPictureServiceImpl implements DirectionToShelterP
             logger.error("DirectionToShelterPicture not exists for shelter : {}", shelterId);
             throw new NotFoundPictureByShelterIdException("Картина по id приюта не найдена в БД!");
         }
-        logger.debug("DirectionToShelterPicture, with studentId = {}, {}", shelterId, directionToShelterPicture);
+        logger.debug("DirectionToShelterPicture, with shelterId = {}, {}", shelterId, directionToShelterPicture);
         return directionToShelterPicture;
     }
 

@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class NotFoundDogByIdException extends RuntimeException {
-    public NotFoundDogByIdException(String message) {
+public class NotFoundPictureByPetIdException extends RuntimeException {
+    public NotFoundPictureByPetIdException(String message) {
         super(message);
     }
 }
