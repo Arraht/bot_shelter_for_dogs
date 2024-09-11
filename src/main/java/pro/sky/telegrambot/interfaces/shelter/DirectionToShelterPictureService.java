@@ -5,7 +5,12 @@ import pro.sky.telegrambot.entity.DirectionToShelterPicture;
 
 import java.io.IOException;
 
+/**
+ * <p>интерфейс обслуживающий "Картинка направление к приюту"</p>
+ *
+ * @Author manxix69
+ */
 public interface DirectionToShelterPictureService {
-    DirectionToShelterPicture find(Long ShelterId);
-    void upload(Long ShelterId, MultipartFile directionToShelterPicture) throws IOException;
+    DirectionToShelterPicture find(Long shelterId);
+    void upload(Long shelterId, MultipartFile directionToShelterPicture) throws IOException;
 }
