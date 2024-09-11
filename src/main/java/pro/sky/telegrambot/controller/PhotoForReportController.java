@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pro.sky.telegrambot.entity.PetPhoto;
-import pro.sky.telegrambot.interfaces.shelter.PetPhotoService;
+import pro.sky.telegrambot.entity.PhotoForReport;
+import pro.sky.telegrambot.interfaces.shelter.PhotoForReportService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,16 +23,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Controller
-@RequestMapping("/pet")
-public class PetPhotoController {
-    private final PetPhotoService petPhotoService;
+@RequestMapping("/report")
+public class PhotoForReportController {
+    private final PhotoForReportService photoForReportService;
 
-    public PetPhotoController(PetPhotoService petPhotoService) {
-        this.petPhotoService = petPhotoService;
+    public PhotoForReportController(PhotoForReportService photoForReportService) {
+        this.photoForReportService = photoForReportService;
     }
 
 
-    @Operation(summary = "Добавление картинки домашнего животного в базу данных",
+    @Operation(summary = "Добавление картинки направления до приюта в базу данных",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -47,27 +47,27 @@ public class PetPhotoController {
                             )
                     )
             },
-            tags = "Pet"
+            tags = "Report"
     )
-    @PostMapping(value = "/{petId}/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> upload(@PathVariable Long petId
+    @PostMapping(value = "/{reportId}/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> upload(@PathVariable Long reportId
             , @RequestParam MultipartFile picture) throws IOException {
-        petPhotoService.upload(petId, picture);
+        photoForReportService.upload(reportId, picture);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/{petId}/picture/from-db")
-    public ResponseEntity<byte[]> download(@PathVariable Long petId) {
-        PetPhoto picture = petPhotoService.find(petId);
+    @GetMapping(value = "/{reportId}/picture/from-db")
+    public ResponseEntity<byte[]> download(@PathVariable Long reportId) {
+        PhotoForReport picture = photoForReportService.find(reportId);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(picture.getMediaType()));
         headers.setContentLength(picture.getData().length);
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(picture.getData());
     }
 
-    @GetMapping(value = "/{petId}/picture/from-file")
-    public void download(@PathVariable Long petId, HttpServletResponse response) throws IOException {
-        PetPhoto picture = petPhotoService.find(petId);
+    @GetMapping(value = "/{reportId}/picture/from-file")
+    public void download(@PathVariable Long reportId, HttpServletResponse response) throws IOException {
+        PhotoForReport picture = photoForReportService.find(reportId);
         Path path = Path.of(picture.getFilePath());
         try (InputStream is = Files.newInputStream(path);
              OutputStream os = response.getOutputStream();

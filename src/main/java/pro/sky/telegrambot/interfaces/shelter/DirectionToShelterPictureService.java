@@ -12,5 +12,5 @@ import java.io.IOException;
  */
 public interface DirectionToShelterPictureService {
     DirectionToShelterPicture find(Long shelterId);
-    void upload(Long ShelterId, MultipartFile directionToShelterPicture) throws IOException;
+    void upload(Long shelterId, MultipartFile directionToShelterPicture) throws IOException;
 }

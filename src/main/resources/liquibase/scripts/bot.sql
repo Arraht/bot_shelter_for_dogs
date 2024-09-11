@@ -90,3 +90,7 @@ CREATE TABLE report(
 CREATE TABLE pet_photo(
     pet_id      BIGSERIAL
 )   INHERITS (picture);
+-- changeset Sergei:14
+CREATE TABLE photo_for_report(
+    report_id      BIGSERIAL
+)   INHERITS (picture);
