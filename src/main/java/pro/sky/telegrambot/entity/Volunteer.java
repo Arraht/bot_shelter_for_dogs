@@ -6,10 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,9 +13,8 @@ import java.util.Objects;
  * @author Игорь:
  * Сущность для хранения информации о волонтёрах в БД
  */
-@Data
 @Entity
-public class Volunteers {
+public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,9 +23,9 @@ public class Volunteers {
     private LocalDateTime workingFirstTime;
     private LocalDateTime workingLastTime;
 
-    public Volunteers(Long id, String name, String nickName,
-                      LocalDateTime workingFirstTime,
-                      LocalDateTime workingLastTime) {
+    public Volunteer(Long id, String name, String nickName,
+                     LocalDateTime workingFirstTime,
+                     LocalDateTime workingLastTime) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
@@ -38,14 +33,54 @@ public class Volunteers {
         this.workingLastTime = workingLastTime;
     }
 
-    public Volunteers() {
+    public Volunteer() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public LocalDateTime getWorkingFirstTime() {
+        return workingFirstTime;
+    }
+
+    public void setWorkingFirstTime(LocalDateTime workingFirstTime) {
+        this.workingFirstTime = workingFirstTime;
+    }
+
+    public LocalDateTime getWorkingLastTime() {
+        return workingLastTime;
+    }
+
+    public void setWorkingLastTime(LocalDateTime workingLastTime) {
+        this.workingLastTime = workingLastTime;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Volunteers volunteer = (Volunteers) o;
+        Volunteer volunteer = (Volunteer) o;
         return Objects.equals(id, volunteer.id);
     }
 
