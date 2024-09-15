@@ -8,6 +8,8 @@ import pro.sky.telegrambot.interfaces.bot.VolunteersChatIdService;
 import pro.sky.telegrambot.interfaces.volunteer.VolunteerService;
 import pro.sky.telegrambot.repository.bot.VolunteersChatIdRepository;
 
+import java.util.List;
+
 @Component
 public class VolunteersChatIdServiceImpl implements VolunteersChatIdService {
     private final VolunteerService volunteerService;
@@ -53,5 +55,15 @@ public class VolunteersChatIdServiceImpl implements VolunteersChatIdService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public SendMessage getCallVolunteer(Update update) {
+        List<VolunteersChatId> volunteersChatsId = volunteersChatIdRepository.findAll();
+        for (VolunteersChatId volunteersChatId : volunteersChatsId) {
+            return new SendMessage(volunteersChatId.getChatId(), "Клиент @" + update.callbackQuery()
+                    .from().username() + " хочет связаться");
+        }
+        return new SendMessage(update.callbackQuery().message().chat().id(), "");
     }
 }

@@ -48,6 +48,8 @@ public class CallbackQueryServiceImpl implements CallbackQueryService {
                 return commandService.getCommandReport(update);
             case "HOW_DOGS":
                 return commandService.getCommandHowDogs(update);
+            case "CALL_VOLUNTEER":
+                return commandService.getCommandCallVolunteer(update);
             default:
                 return new SendMessage(update.message().chat().id(), "");
         }

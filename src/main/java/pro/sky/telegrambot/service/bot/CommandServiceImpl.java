@@ -109,6 +109,17 @@ public class CommandServiceImpl implements CommandService {
     }
 
     /**
+     * Метод для связи с волонтёрами для команды CALL_VOLUNTEER
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage getCommandCallVolunteer(Update update) {
+        return volunteersChatIdService.getCallVolunteer(update);
+    }
+
+    /**
      * Метод для команды REPORT
      *
      * @param update

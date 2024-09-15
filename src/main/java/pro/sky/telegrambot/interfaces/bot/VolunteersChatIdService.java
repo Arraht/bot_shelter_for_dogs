@@ -6,4 +6,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 public interface VolunteersChatIdService {
 
     SendMessage registerVolunteer(Update update);
+
+    SendMessage getCallVolunteer(Update update);
 }

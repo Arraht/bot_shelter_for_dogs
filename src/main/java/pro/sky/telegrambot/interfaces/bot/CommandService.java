@@ -17,6 +17,8 @@ public interface CommandService {
 
     SendMessage getCommandCallVol(Update update);
 
+    SendMessage getCommandCallVolunteer(Update update);
+
     SendMessage getCommandReport(Update update);
 
     SendMessage getCommandHowDogs(Update update);

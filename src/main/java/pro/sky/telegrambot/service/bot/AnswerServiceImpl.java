@@ -167,8 +167,9 @@ public class AnswerServiceImpl implements AnswerService {
      */
     @Override
     public SendMessage callVolunteer(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Здесь будет вызов волонтёра!");
-        message.replyMarkup(createMarkupInline(createButton("Приюты", "SHELTER")));
+        SendMessage message = new SendMessage(chatId, "Позвать волонтёра или вернуться к выбору приюта");
+        message.replyMarkup(createMarkupInline(createButton("Приюты", "SHELTER"),
+                createButton("Позвать волонтёра","CALL_VOLUNTEER")));
         return message;
     }
 
