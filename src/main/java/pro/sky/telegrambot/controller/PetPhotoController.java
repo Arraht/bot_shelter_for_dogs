@@ -49,14 +49,31 @@ public class PetPhotoController {
             },
             tags = "Pet"
     )
-    @PostMapping(value = "/{petId}/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/{petId}/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> upload(@PathVariable Long petId
             , @RequestParam MultipartFile picture) throws IOException {
         petPhotoService.upload(petId, picture);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/{petId}/picture/from-db")
+    @Operation(summary = "Получение картинки домашнего животного из базы данных",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при добавлении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Pet"
+    )
+    @GetMapping(value = "/{petId}/photo/from-db")
     public ResponseEntity<byte[]> download(@PathVariable Long petId) {
         PetPhoto picture = petPhotoService.find(petId);
         HttpHeaders headers = new HttpHeaders();
@@ -65,7 +82,24 @@ public class PetPhotoController {
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(picture.getData());
     }
 
-    @GetMapping(value = "/{petId}/picture/from-file")
+    @Operation(summary = "Получение картинки домашнего животного из файловой системы",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при добавлении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Pet"
+    )
+    @GetMapping(value = "/{petId}/photo/from-file")
     public void download(@PathVariable Long petId, HttpServletResponse response) throws IOException {
         PetPhoto picture = petPhotoService.find(petId);
         Path path = Path.of(picture.getFilePath());
