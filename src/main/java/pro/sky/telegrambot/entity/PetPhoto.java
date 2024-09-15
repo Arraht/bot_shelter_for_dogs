@@ -30,11 +30,11 @@ public class PetPhoto extends Picture {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PetPhoto petPhoto = (PetPhoto) o;
-        return Objects.equals(pet.getId(), petPhoto.pet.getId());
+        return Objects.equals(super.getId(), petPhoto.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(pet.getId());
+        return Objects.hashCode(super.getId());
     }
 }
