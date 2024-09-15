@@ -9,10 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.entity.Report;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.exception.NotFoundReportByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.shelter.ReportService;
@@ -172,7 +171,7 @@ public class ReportController {
                                             @Parameter(description = "Проверен", required = true)
                                             @RequestBody Boolean isApproved,
                                             @Parameter(description = "Каким волонтерем проведена проверка отчета", required = true)
-                                            @RequestBody Volunteer whomApproved
+                                            @RequestBody Volunteers whomApproved
     ) {
         return ResponseEntity.ok(reportService.approved(reportId, isApproved, whomApproved));
     }

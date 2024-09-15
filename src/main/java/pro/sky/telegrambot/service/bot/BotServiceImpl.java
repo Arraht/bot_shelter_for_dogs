@@ -25,8 +25,12 @@ public class BotServiceImpl implements BotService {
     public SendMessage check(Update update) {
         if (update.message() != null && update.message().text().equals("/start")) {
             return commandService.getStart(update);
-        } else {
-            return callbackQueryService.checkNullCallbackQuery(update);
+        } else if (update.message() != null && update.message().text().equals("/adminShelterVolunteer")) {
+            return commandService.getCommandAdmin(update);
+        } else if (update.message() != null
+                && update.message().text().contains("/nicknameVolunteersAdminShelter")) {
+            return commandService.checkNickNameRegister(update);
         }
+        return callbackQueryService.checkNullCallbackQuery(update);
     }
 }

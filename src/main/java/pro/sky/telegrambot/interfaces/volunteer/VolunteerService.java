@@ -1,6 +1,6 @@
 package pro.sky.telegrambot.interfaces.volunteer;
 
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 
 /**
  * <p>интерфейс "обслуживающий волонтеров"</p>
@@ -8,9 +8,21 @@ import pro.sky.telegrambot.entity.Volunteer;
  * @Author manxix69
  */
 public interface VolunteerService {
-    Volunteer add(Volunteer volunteer);
-    Volunteer find(Volunteer volunteer);
-    Volunteer edit(Volunteer volunteer);
-    Volunteer remove(Volunteer volunteer);
-    Volunteer findById(Long volunteerId);
+    Volunteers add(Volunteers volunteers);
+
+    Volunteers find(Volunteers volunteers);
+
+    Volunteers edit(Volunteers volunteers);
+
+    Volunteers remove(Volunteers volunteers);
+
+    Volunteers findById(Long volunteerId);
+
+    /**
+     * Метод для поиска волонтёра по никнейму
+     *
+     * @param nickName
+     * @return
+     */
+    Volunteers getByNickName(String nickName);
 }

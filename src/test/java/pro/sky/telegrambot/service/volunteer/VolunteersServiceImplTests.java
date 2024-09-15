@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.exception.NotFoundVolunteerByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.volunteer.VolunteerService;
@@ -20,27 +20,27 @@ import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class VolunteerServiceImplTests {
+public class VolunteersServiceImplTests {
     @Autowired
     private VolunteerService volunteerService ;
     @MockBean
     private VolunteerRepository volunteerRepository;
 
-    private final Volunteer TEST_VOLUNTEER = new Volunteer();
-    private final Volunteer TEST_VOLUNTEER_WITH_NULL_ID = new Volunteer();
+    private final Volunteers TEST_Volunteers = new Volunteers();
+    private final Volunteers TEST_Volunteers_WITH_NULL_ID = new Volunteers();
 
-    private Volunteer EXPECTED_VOLUNTEER = new Volunteer();
+    private Volunteers EXPECTED_Volunteers = new Volunteers();
 
     @BeforeEach
     void init_volunteer(){
-        TEST_VOLUNTEER.setId(1l);
-        TEST_VOLUNTEER.setName("TEST_name");
-        TEST_VOLUNTEER.setNickName("TEST_NICKNAME");
-        TEST_VOLUNTEER.setWorkingFirstTime(LocalDateTime.now());
-        TEST_VOLUNTEER.setWorkingLastTime(LocalDateTime.now());
+        TEST_Volunteers.setId(1l);
+        TEST_Volunteers.setName("TEST_name");
+        TEST_Volunteers.setNickName("TEST_NICKNAME");
+        TEST_Volunteers.setWorkingFirstTime(LocalDateTime.now());
+        TEST_Volunteers.setWorkingLastTime(LocalDateTime.now());
     }
 
-    private void assertsObject(Volunteer expected, Volunteer actual) {
+    private void assertsObject(Volunteers expected, Volunteers actual) {
         Assertions.assertEquals(expected.getId(),actual.getId());
         Assertions.assertEquals(expected.getName(),actual.getName());
         Assertions.assertEquals(expected.getNickName(),actual.getNickName());
@@ -68,9 +68,9 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void shouldBeАFindByIdVolunteer() {
-        Mockito.when(volunteerRepository.findById(TEST_VOLUNTEER.getId())).thenReturn(Optional.ofNullable(TEST_VOLUNTEER));
-        EXPECTED_VOLUNTEER = volunteerService.findById(TEST_VOLUNTEER.getId());
-        assertsObject(EXPECTED_VOLUNTEER, TEST_VOLUNTEER);
+        Mockito.when(volunteerRepository.findById(TEST_Volunteers.getId())).thenReturn(Optional.ofNullable(TEST_Volunteers));
+        EXPECTED_Volunteers = volunteerService.findById(TEST_Volunteers.getId());
+        assertsObject(EXPECTED_Volunteers, TEST_Volunteers);
     }
 
     /**
@@ -79,9 +79,9 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void shouldBeAddVolunteer() {
-        Mockito.when(volunteerRepository.save(TEST_VOLUNTEER_WITH_NULL_ID)).thenReturn(TEST_VOLUNTEER);
-        EXPECTED_VOLUNTEER = volunteerService.add(TEST_VOLUNTEER_WITH_NULL_ID);
-        assertsObject(EXPECTED_VOLUNTEER, TEST_VOLUNTEER);
+        Mockito.when(volunteerRepository.save(TEST_Volunteers_WITH_NULL_ID)).thenReturn(TEST_Volunteers);
+        EXPECTED_Volunteers = volunteerService.add(TEST_Volunteers_WITH_NULL_ID);
+        assertsObject(EXPECTED_Volunteers, TEST_Volunteers);
     }
 
     /**
@@ -89,7 +89,7 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void addVolunteerShouldBeReturnNotNullIdException() {
-        Assertions.assertThrows(NotNullIdException.class, ()-> volunteerService.add(TEST_VOLUNTEER));
+        Assertions.assertThrows(NotNullIdException.class, ()-> volunteerService.add(TEST_Volunteers));
     }
 
     /**
@@ -98,10 +98,10 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void shouldBeFindVolunteer() {
-        Mockito.when(volunteerRepository.findById(TEST_VOLUNTEER.getId())).thenReturn(Optional.of(TEST_VOLUNTEER));
-        EXPECTED_VOLUNTEER = volunteerService.find(TEST_VOLUNTEER);
+        Mockito.when(volunteerRepository.findById(TEST_Volunteers.getId())).thenReturn(Optional.of(TEST_Volunteers));
+        EXPECTED_Volunteers = volunteerService.find(TEST_Volunteers);
 
-        assertsObject(EXPECTED_VOLUNTEER, TEST_VOLUNTEER);
+        assertsObject(EXPECTED_Volunteers, TEST_Volunteers);
     }
 
     /**
@@ -110,9 +110,9 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void tryFindVolunteerShouldBeReturnNotFoundVolunteerByIdException() {
-        Mockito.when(volunteerRepository.findById(TEST_VOLUNTEER.getId())).thenReturn(Optional.empty());
+        Mockito.when(volunteerRepository.findById(TEST_Volunteers.getId())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(NotFoundVolunteerByIdException.class, ()-> volunteerService.find(TEST_VOLUNTEER));
+        Assertions.assertThrows(NotFoundVolunteerByIdException.class, ()-> volunteerService.find(TEST_Volunteers));
     }
 
     /**
@@ -121,15 +121,15 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void shouldBeEditVolunteer() {
-        EXPECTED_VOLUNTEER.setName("TEST NAME MUST CHANGE");
-        TEST_VOLUNTEER.setName("NAME WAS CHANGED");
+        EXPECTED_Volunteers.setName("TEST NAME MUST CHANGE");
+        TEST_Volunteers.setName("NAME WAS CHANGED");
 
-        Mockito.when(volunteerRepository.findById(TEST_VOLUNTEER.getId())).thenReturn(Optional.of(TEST_VOLUNTEER));
-        Mockito.when(volunteerRepository.save(TEST_VOLUNTEER)).thenReturn(TEST_VOLUNTEER);
+        Mockito.when(volunteerRepository.findById(TEST_Volunteers.getId())).thenReturn(Optional.of(TEST_Volunteers));
+        Mockito.when(volunteerRepository.save(TEST_Volunteers)).thenReturn(TEST_Volunteers);
 
-        EXPECTED_VOLUNTEER = volunteerService.edit(TEST_VOLUNTEER);
+        EXPECTED_Volunteers = volunteerService.edit(TEST_Volunteers);
 
-        assertsObject(EXPECTED_VOLUNTEER, TEST_VOLUNTEER);
+        assertsObject(EXPECTED_Volunteers, TEST_Volunteers);
     }
 
     /**
@@ -138,11 +138,11 @@ public class VolunteerServiceImplTests {
      */
     @Test
     public void shouldBeRemoveVolunteer() {
-        TEST_VOLUNTEER.setId(1L);
-        Mockito.when(volunteerRepository.findById(TEST_VOLUNTEER.getId())).thenReturn(Optional.of(TEST_VOLUNTEER));
-        EXPECTED_VOLUNTEER = volunteerService.remove(TEST_VOLUNTEER);
+        TEST_Volunteers.setId(1L);
+        Mockito.when(volunteerRepository.findById(TEST_Volunteers.getId())).thenReturn(Optional.of(TEST_Volunteers));
+        EXPECTED_Volunteers = volunteerService.remove(TEST_Volunteers);
 
-        assertsObject(EXPECTED_VOLUNTEER, TEST_VOLUNTEER);
+        assertsObject(EXPECTED_Volunteers, TEST_Volunteers);
     }
 
 }

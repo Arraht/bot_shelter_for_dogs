@@ -1,7 +1,7 @@
 package pro.sky.telegrambot.interfaces.shelter;
 
 import pro.sky.telegrambot.entity.Report;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 
 import java.util.Collection;
 
@@ -17,6 +17,6 @@ public interface ReportService {
     Report remove(Report report);
     Report findById(Long reportId);
 
-    Report approved(Long reportId, Boolean isApproved, Volunteer whomApproved);
+    Report approved(Long reportId, Boolean isApproved, Volunteers whomApproved);
     Collection<Report> getReportsByPetId(Long petId);
 }

@@ -1,23 +1,16 @@
-package pro.sky.telegrambot.service.report;
+package pro.sky.telegrambot.service.shelter;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Report;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.exception.NotFoundReportByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.shelter.ReportService;
 import pro.sky.telegrambot.repository.shelter.ReportRepository;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * <p>сервис ReportServiceImpl для обработки отчетов по домашним животным</p>
@@ -132,7 +125,7 @@ public class ReportServiceImpl implements ReportService {
      * @return возвращает отредактированный отчет
      */
     @Override
-    public Report approved(Long reportId, Boolean isApproved, Volunteer whomApproved) {
+    public Report approved(Long reportId, Boolean isApproved, Volunteers whomApproved) {
         logger.info("Was invoked method approved : reportId={}, isApproved={}, whomApproved={},", reportId, isApproved,whomApproved);
         Report report = findById(reportId);
         report.setAccepted(isApproved);

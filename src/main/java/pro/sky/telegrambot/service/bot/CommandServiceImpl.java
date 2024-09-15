@@ -6,15 +6,18 @@ import org.springframework.stereotype.Component;
 import pro.sky.telegrambot.interfaces.bot.AnswerService;
 import pro.sky.telegrambot.interfaces.bot.ClientService;
 import pro.sky.telegrambot.interfaces.bot.CommandService;
+import pro.sky.telegrambot.interfaces.bot.VolunteersChatIdService;
 
 @Component
 public class CommandServiceImpl implements CommandService {
     private final ClientService clientService;
     private final AnswerService answerService;
+    private final VolunteersChatIdService volunteersChatIdService;
 
-    public CommandServiceImpl(ClientService clientService, AnswerService answerService) {
+    public CommandServiceImpl(ClientService clientService, AnswerService answerService, VolunteersChatIdService volunteersChatIdService) {
         this.clientService = clientService;
         this.answerService = answerService;
+        this.volunteersChatIdService = volunteersChatIdService;
     }
 
     /**
@@ -42,6 +45,31 @@ public class CommandServiceImpl implements CommandService {
         clientService.checkClient(null, update.message().chat().firstName(), update.message().chat().id());
         check(update.message().chat().id(), update.message().text());
         return answerService.welcome(update.message().chat().id());
+    }
+
+    /**
+     * Метод для проверки никнейма волонтёра при регистрации в боте через
+     * команду /nicknameVolunteersAdminShelter:
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage checkNickNameRegister(Update update) {
+        return volunteersChatIdService.registerVolunteer(update);
+    }
+
+    /**
+     * Метод для регистрации chat_id волонтёра через команду /adminShelterVolunteer
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage getCommandAdmin(Update update) {
+        return new SendMessage(update.message().chat().id(), "Введите свой никнейм, который указывали " +
+                "при регистрации, с помощью команды /nicknameVolunteersAdminShelter через @ без пробелов(пример : " +
+                "/nicknameVolunteersAdminShelter@Gray)");
     }
 
     /**
@@ -78,6 +106,17 @@ public class CommandServiceImpl implements CommandService {
     public SendMessage getCommandCallVol(Update update) {
         check(update.callbackQuery().message().chat().id(), update.callbackQuery().data());
         return answerService.callVolunteer(update.callbackQuery().message().chat().id());
+    }
+
+    /**
+     * Метод для связи с волонтёрами для команды CALL_VOLUNTEER
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage getCommandCallVolunteer(Update update) {
+        return volunteersChatIdService.getCallVolunteer(update);
     }
 
     /**

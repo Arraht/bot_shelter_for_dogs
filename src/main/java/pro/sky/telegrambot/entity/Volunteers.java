@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,7 +13,7 @@ import java.util.Objects;
  * Сущность для хранения информации о волонтёрах в БД
  */
 @Entity
-public class Volunteer {
+public class Volunteers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +22,9 @@ public class Volunteer {
     private LocalDateTime workingFirstTime;
     private LocalDateTime workingLastTime;
 
-    public Volunteer(Long id, String name, String nickName,
-                     LocalDateTime workingFirstTime,
-                     LocalDateTime workingLastTime) {
+    public Volunteers(Long id, String name, String nickName,
+                      LocalDateTime workingFirstTime,
+                      LocalDateTime workingLastTime) {
         this.id = id;
         this.name = name;
         this.nickName = nickName;
@@ -33,7 +32,7 @@ public class Volunteer {
         this.workingLastTime = workingLastTime;
     }
 
-    public Volunteer() {
+    public Volunteers() {
     }
 
     public Long getId() {
@@ -80,13 +79,13 @@ public class Volunteer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Volunteer volunteer = (Volunteer) o;
-        return Objects.equals(id, volunteer.id);
+        Volunteers that = (Volunteers) o;
+        return Objects.equals(id, that.id) && Objects.equals(nickName, that.nickName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id, nickName);
     }
 
     public String toString() {

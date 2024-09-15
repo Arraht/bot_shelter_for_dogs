@@ -30,7 +30,7 @@ public class Report {
 
     @OneToOne
     @JoinColumn(name = "volunteer_id")
-    private Volunteer whoAccepted;
+    private Volunteers whoAccepted;
 
     @OneToOne
     @JoinColumn(name = "client_id")
@@ -107,11 +107,11 @@ public class Report {
         this.timeReceivedText = timeReceivedText;
     }
 
-    public Volunteer getWhoAccepted() {
+    public Volunteers getWhoAccepted() {
         return whoAccepted;
     }
 
-    public void setWhoAccepted(Volunteer whoAccepted) {
+    public void setWhoAccepted(Volunteers whoAccepted) {
         this.whoAccepted = whoAccepted;
     }
 
