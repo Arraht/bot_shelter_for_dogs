@@ -32,7 +32,7 @@ public class PhotoForReportController {
     }
 
 
-    @Operation(summary = "Добавление картинки направления до приюта в базу данных",
+    @Operation(summary = "Добавление картинки для отчета о состоянии животного",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -49,14 +49,31 @@ public class PhotoForReportController {
             },
             tags = "Report"
     )
-    @PostMapping(value = "/{reportId}/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/{reportId}/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> upload(@PathVariable Long reportId
             , @RequestParam MultipartFile picture) throws IOException {
         photoForReportService.upload(reportId, picture);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/{reportId}/picture/from-db")
+    @Operation(summary = "получение картинки отчета о состоянии животного из базы данных",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при получении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Report"
+    )
+    @GetMapping(value = "/{reportId}/photo/from-db")
     public ResponseEntity<byte[]> download(@PathVariable Long reportId) {
         PhotoForReport picture = photoForReportService.find(reportId);
         HttpHeaders headers = new HttpHeaders();
@@ -65,7 +82,24 @@ public class PhotoForReportController {
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(picture.getData());
     }
 
-    @GetMapping(value = "/{reportId}/picture/from-file")
+    @Operation(summary = "получение картинки отчета о состоянии животного из файловой системы",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при получении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Report"
+    )
+    @GetMapping(value = "/{reportId}/photo/from-file")
     public void download(@PathVariable Long reportId, HttpServletResponse response) throws IOException {
         PhotoForReport picture = photoForReportService.find(reportId);
         Path path = Path.of(picture.getFilePath());

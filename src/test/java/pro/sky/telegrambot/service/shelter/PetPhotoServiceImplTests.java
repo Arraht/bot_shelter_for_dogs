@@ -1,6 +1,5 @@
 package pro.sky.telegrambot.service.shelter;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,52 +11,48 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import pro.sky.telegrambot.entity.DirectionToShelterPicture;
-import pro.sky.telegrambot.entity.Shelter;
-import pro.sky.telegrambot.exception.NotFoundPictureByShelterIdException;
-import pro.sky.telegrambot.exception.NotFoundShelterByIdException;
-import pro.sky.telegrambot.interfaces.shelter.DirectionToShelterPictureService;
+import pro.sky.telegrambot.entity.*;
+import pro.sky.telegrambot.exception.NotFoundPictureByPetIdException;
+import pro.sky.telegrambot.interfaces.shelter.PetPhotoService;
+import pro.sky.telegrambot.interfaces.shelter.PetService;
 import pro.sky.telegrambot.interfaces.shelter.PictureService;
-import pro.sky.telegrambot.interfaces.shelter.ShelterService;
-import pro.sky.telegrambot.repository.shelter.DirectionToShelterPictureRepository;
+import pro.sky.telegrambot.interfaces.shelter.ReportService;
+import pro.sky.telegrambot.repository.shelter.PetPhotoRepository;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Optional;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-public class DirectionToShelterPictureServiceImplTests {
-
+public class PetPhotoServiceImplTests {
     @Autowired
-    private DirectionToShelterPictureService directionToShelterPictureService;
+    private PetPhotoService petPhotoService;
     @Autowired
     private PictureService pictureService;
 
     @MockBean
-    private DirectionToShelterPictureRepository directionToShelterPictureRepository;
+    private PetPhotoRepository petPhotoRepository;
     @MockBean
-    private ShelterService shelterService;
+    private PetService petService;
 
 
-    private DirectionToShelterPicture TEST_PICTURE = new DirectionToShelterPicture();
-    private DirectionToShelterPicture EXPECTED_PICTURE = new DirectionToShelterPicture();
+    private PetPhoto TEST_PICTURE = new PetPhoto();
+    private PetPhoto EXPECTED_PICTURE = new PetPhoto();
 
     @BeforeEach
     void init(){
         TEST_PICTURE.setId(1l);
-        TEST_PICTURE.setShelter(null);
+        TEST_PICTURE.setPet(null);
         TEST_PICTURE.setData( new byte[]{} );
         TEST_PICTURE.setFilePath(null);
         TEST_PICTURE.setFileSize(0);
         TEST_PICTURE.setMediaType(null);
     }
 
-    private void assertsObject(DirectionToShelterPicture expected, DirectionToShelterPicture actual) {
+    private void assertsObject(PetPhoto expected, PetPhoto actual) {
 
         Assertions.assertEquals(expected.getId(),actual.getId());
-        Assertions.assertEquals(expected.getShelter(),actual.getShelter());
+        Assertions.assertEquals(expected.getPet(),actual.getPet());
         Assertions.assertEquals(expected.getData(),actual.getData());
         Assertions.assertEquals(expected.getFilePath(),actual.getFilePath());
         Assertions.assertEquals(expected.getFileSize(),actual.getFileSize());
@@ -70,14 +65,14 @@ public class DirectionToShelterPictureServiceImplTests {
     }
 
     /**
-     * Ищет по идентификатору приюта картину. и получает ошибку когда не находт
+     * Ищет по идентификатору приюта картину. и получает ошибку когда не находит
      * @Note для тестирования используется Mockito
      */
     @Test
-    public void shouldBeReturnNotFoundPictureByShelterIdException() {
-        Mockito.when(directionToShelterPictureRepository.findByShelterId(-1l)).thenReturn(null);
+    public void shouldBeReturnNotFoundPictureByPetPhotoIdException() {
+        Mockito.when(petPhotoRepository.findByPetId(-1l)).thenReturn(null);
 
-        Assertions.assertThrows(NotFoundPictureByShelterIdException.class, ()->directionToShelterPictureService.find(-1l));
+        Assertions.assertThrows(NotFoundPictureByPetIdException.class, ()->petPhotoService.find(-1l));
     }
 
     /**
@@ -86,8 +81,8 @@ public class DirectionToShelterPictureServiceImplTests {
      */
     @Test
     public void shouldBeFind() {
-        Mockito.when(directionToShelterPictureRepository.findByShelterId(1l)).thenReturn(TEST_PICTURE);
-        EXPECTED_PICTURE = directionToShelterPictureService.find(1l);
+        Mockito.when(petPhotoRepository.findByPetId(1l)).thenReturn(TEST_PICTURE);
+        EXPECTED_PICTURE = petPhotoService.find(1l);
         assertsObject(EXPECTED_PICTURE, TEST_PICTURE);
     }
 
@@ -97,26 +92,29 @@ public class DirectionToShelterPictureServiceImplTests {
      */
     @Test
     public void shouldBeUploadAndFindPicture() {
-        DirectionToShelterPicture picture = new DirectionToShelterPicture();
-        Shelter shelter = new Shelter();
+        PetPhoto picture = new PetPhoto();
+        PetPhoto petPhoto = new PetPhoto();
+
+        Pet pet = new Dog();
+
         byte[] arr = new byte[]{1,2,3,4};
         MultipartFile multipartFile = new MockMultipartFile("TEST_FILE_NAME" , arr);
 
         picture.setData(arr);
-        shelter.setName("TEST_name");
-        shelter.setAddress("TEST_Address");
-        shelter.setId(1l);
+        petPhoto.setPet(pet);
+        petPhoto.setPet(pet);
+        petPhoto.setId(1l);
 
-        Mockito.when(shelterService.findById(shelter.getId())).thenReturn(shelter);
-        Mockito.when(directionToShelterPictureRepository.findByShelterId(shelter.getId())).thenReturn(picture);
+        Mockito.when(petService.findById(pet.getId())).thenReturn(pet);
+        Mockito.when(petPhotoRepository.findByPetId(petPhoto.getId())).thenReturn(picture);
 
         try {
-            directionToShelterPictureService.upload(shelter.getId(), multipartFile);
+            petPhotoService.upload(pet.getId(), multipartFile);
         } catch (IOException e) {
             Assertions.assertNull(e);
         }
 
-        picture = directionToShelterPictureService.find(shelter.getId());
+        picture = petPhotoService.find(petPhoto.getId());
         Assertions.assertEquals(Arrays.toString(picture.getData()), Arrays.toString(arr));
     }
 
@@ -125,23 +123,24 @@ public class DirectionToShelterPictureServiceImplTests {
      * @Note для тестирования используется Mockito
      */
     @Test
-    public void shouldBeNotFoundAvatarByStudentIdExceptionOrReturnAvatar() {
-        DirectionToShelterPicture picture = new DirectionToShelterPicture();
-        Shelter shelter = new Shelter();
+    public void shouldBeNotFoundPictureByPetIdExceptionOrReturnAvatar() {
+        PetPhoto picture = new PetPhoto();
+        Pet pet = new Dog();
+        pet.setId(1L);
         byte[] arr = new byte[]{1,2,3,4};
         MultipartFile multipartFile = new MockMultipartFile("TEST_FILE_NAME" , arr);
 
         picture.setData(arr);
-        shelter.setId(1l);
+        pet.setId(1l);
 
-        Mockito.when(shelterService.findById(shelter.getId())).thenReturn(shelter);
-        Mockito.when(directionToShelterPictureRepository.findByShelterId(shelter.getId())).thenReturn(null);
+        Mockito.when(petService.findById(pet.getId())).thenReturn(pet);
+        Mockito.when(petPhotoRepository.findByPetId(pet.getId())).thenReturn(null);
 
         try {
-            directionToShelterPictureService.upload(shelter.getId(), multipartFile);
+            petPhotoService.upload(pet.getId(), multipartFile);
         } catch (IOException e) {
             Assertions.assertNull(e);
         }
-        Assertions.assertThrows(NotFoundPictureByShelterIdException.class, () -> directionToShelterPictureService.find(shelter.getId()));
+        Assertions.assertThrows(NotFoundPictureByPetIdException.class, () -> petPhotoService.find(pet.getId()));
     }
 }

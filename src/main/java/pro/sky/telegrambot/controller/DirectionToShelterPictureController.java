@@ -56,6 +56,23 @@ public class DirectionToShelterPictureController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Получение картинки направления до приюта из базы данных",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при получении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Shelter"
+    )
     @GetMapping(value = "/{shelterId}/picture/from-db")
     public ResponseEntity<byte[]> download(@PathVariable Long shelterId) {
         DirectionToShelterPicture picture = directionToShelterPictureService.find(shelterId);
@@ -65,6 +82,23 @@ public class DirectionToShelterPictureController {
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(picture.getData());
     }
 
+    @Operation(summary = "Получение картинки направления до приюта из файловой системы",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "возвращает ответ при успехе"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "возвращает исключение если возникло исключение при получении картинки",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = IOException.class))
+                            )
+                    )
+            },
+            tags = "Shelter"
+        )
     @GetMapping(value = "/{shelterId}/picture/from-file")
     public void download(@PathVariable Long shelterId, HttpServletResponse response) throws IOException {
         DirectionToShelterPicture picture = directionToShelterPictureService.find(shelterId);
