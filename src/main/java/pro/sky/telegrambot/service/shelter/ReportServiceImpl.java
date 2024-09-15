@@ -1,11 +1,5 @@
-package pro.sky.telegrambot.service.report;
+package pro.sky.telegrambot.service.shelter;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,7 +11,6 @@ import pro.sky.telegrambot.interfaces.shelter.ReportService;
 import pro.sky.telegrambot.repository.shelter.ReportRepository;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * <p>сервис ReportServiceImpl для обработки отчетов по домашним животным</p>

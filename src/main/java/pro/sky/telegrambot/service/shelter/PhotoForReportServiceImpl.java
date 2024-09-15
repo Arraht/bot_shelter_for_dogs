@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.service.report;
+package pro.sky.telegrambot.service.shelter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
