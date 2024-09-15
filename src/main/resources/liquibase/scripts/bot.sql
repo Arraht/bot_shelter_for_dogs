@@ -4,9 +4,9 @@
 CREATE TABLE volunteers(
 id SERIAL,
 name TEXT,
-nickName TEXT,
-workingFirstTime TIMESTAMP,
-workingLastTime TIMESTAMP
+nick_name TEXT,
+working_first_time TIMESTAMP,
+working_last_time TIMESTAMP
 )
 -- changeset Igor:2
 CREATE TABLE answer(
@@ -21,22 +21,22 @@ name TEXT,
 chat_id INTEGER
 )
 -- changeset Igor:4
-CREATE TABLE BotTalkClient(
+CREATE TABLE bot_talk_client(
 id SERIAL,
-answerId INTEGER,
+answer_id INTEGER,
 name TEXT,
 chat_id INTEGER,
-timeSendMessage TIMESTAMP,
-initialSend TEXT,
-successOfSending BOOLEAN
+time_send_message TIMESTAMP,
+initial_send TEXT,
+success_of_sending BOOLEAN
 )
 -- changeset Igor:5
-CREATE TABLE VolunteersTalkClient(
+CREATE TABLE volunteers_talk_client(
 id SERIAL,
-nameVolunteers TEXT,
-nameClient TEXT,
+name_volunteers TEXT,
+name_client TEXT,
 chat_id INTEGER,
-appointmentTime TIMESTAMP
+appointment_time TIMESTAMP
 )
 -- changeset Sergei:6
 CREATE TABLE shelter(
@@ -94,3 +94,10 @@ CREATE TABLE pet_photo(
 CREATE TABLE photo_for_report(
     report_id      BIGSERIAL
 )   INHERITS (picture);
+
+-- changeset Igor:14
+CREATE TABLE volunteers_chat_id(
+id SERIAL,
+volunteer_id INTEGER,
+chat_id INTEGER
+)

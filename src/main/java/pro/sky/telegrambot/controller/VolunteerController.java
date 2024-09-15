@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.exception.NotFoundVolunteerByIdException;
 import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.volunteer.VolunteerService;
@@ -30,7 +30,7 @@ public class VolunteerController {
                             description = "возвращает созданного в базе данных волонтера",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Volunteer.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = Volunteers.class))
                             )
                     ),
                     @ApiResponse(
@@ -45,9 +45,9 @@ public class VolunteerController {
             tags = "Volunteer"
     )
     @PostMapping
-    public ResponseEntity<Volunteer> addVolunteer(@Parameter(description = "структура волонтер", required = true)
-                                                @RequestBody Volunteer volunteer) {
-        return ResponseEntity.ok(volunteerService.add(volunteer));
+    public ResponseEntity<Volunteers> addVolunteer(@Parameter(description = "структура волонтер", required = true)
+                                                @RequestBody Volunteers volunteers) {
+        return ResponseEntity.ok(volunteerService.add(volunteers));
     }
 
     @Operation(summary = "Поиск волонтера в базе данных",
@@ -57,7 +57,7 @@ public class VolunteerController {
                             description = "возвращает найденного в базе данных волонтер",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Volunteer.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = Volunteers.class))
                             )
                     ),
                     @ApiResponse(
@@ -72,9 +72,9 @@ public class VolunteerController {
             tags = "Volunteer"
     )
     @GetMapping
-    public ResponseEntity<Volunteer> findVolunteer(@Parameter(description = "структура волонтер", required = true)
-                                               @RequestBody Volunteer volunteer) {
-        return ResponseEntity.ok(volunteerService.find(volunteer));
+    public ResponseEntity<Volunteers> findVolunteer(@Parameter(description = "структура волонтер", required = true)
+                                               @RequestBody Volunteers volunteers) {
+        return ResponseEntity.ok(volunteerService.find(volunteers));
     }
 
     @Operation(summary = "Редактирование волонтера в базе данных",
@@ -84,7 +84,7 @@ public class VolunteerController {
                             description = "возвращает отредактированного в базе данных волонтер",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Volunteer.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = Volunteers.class))
                             )
                     ),
                     @ApiResponse(
@@ -99,10 +99,10 @@ public class VolunteerController {
             tags = "Volunteer"
     )
     @PutMapping
-    public ResponseEntity<Volunteer> editVolunteer( @Parameter(description = "структура приют", required = true)
-                                                    @RequestBody Volunteer volunteer
+    public ResponseEntity<Volunteers> editVolunteer(@Parameter(description = "структура приют", required = true)
+                                                    @RequestBody Volunteers volunteers
     ) {
-        return ResponseEntity.ok(volunteerService.edit(volunteer));
+        return ResponseEntity.ok(volunteerService.edit(volunteers));
     }
     @Operation(summary = "Удаление волонтера в базе данных",
             responses = {
@@ -111,7 +111,7 @@ public class VolunteerController {
                             description = "возвращает удаленного в базе данных волонтера",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    array = @ArraySchema(schema = @Schema(implementation = Volunteer.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = Volunteers.class))
                             )
                     ),
                     @ApiResponse(
@@ -126,8 +126,8 @@ public class VolunteerController {
             tags = "Volunteer"
     )
     @DeleteMapping
-    public ResponseEntity<Volunteer> deleteVolunteer(@Parameter(description = "структура приют", required = true)
-                                                 @RequestBody Volunteer volunteer) {
-        return ResponseEntity.ok(volunteerService.remove(volunteer));
+    public ResponseEntity<Volunteers> deleteVolunteer(@Parameter(description = "структура приют", required = true)
+                                                 @RequestBody Volunteers volunteers) {
+        return ResponseEntity.ok(volunteerService.remove(volunteers));
     }
 }

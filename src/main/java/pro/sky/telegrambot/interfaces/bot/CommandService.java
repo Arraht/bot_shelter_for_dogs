@@ -7,6 +7,10 @@ public interface CommandService {
 
     SendMessage getStart(Update update);
 
+    SendMessage checkNickNameRegister(Update update);
+
+    SendMessage getCommandAdmin(Update update);
+
     SendMessage getCommandShelterDogs(Update update);
 
     SendMessage getCommandShelter(Update update);
