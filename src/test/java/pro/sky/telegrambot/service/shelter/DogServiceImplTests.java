@@ -66,14 +66,14 @@ public class DogServiceImplTests {
 
     @Test
     public void shouldBeFind() {
-        Mockito.when(petRepository.findById(TEST_DOG.getId())).thenReturn(Optional.of(TEST_DOG));
+        Mockito.when(petRepository.findById(TEST_DOG.getId(), Dog.CLASS_PET)).thenReturn(Optional.of(TEST_DOG));
         EXPECTED_DOG = petService.find(TEST_DOG);
         assertsObject(EXPECTED_DOG, TEST_DOG);
     }
 
     @Test
     public void shouldBeEdit() {
-        Mockito.when(petRepository.findById(TEST_DOG.getId())).thenReturn(Optional.of(TEST_DOG));
+        Mockito.when(petRepository.findById(TEST_DOG.getId(), Dog.CLASS_PET)).thenReturn(Optional.of(TEST_DOG));
         Mockito.when(petRepository.save(TEST_DOG)).thenReturn(TEST_DOG);
 
         TEST_DOG.setWeight(45.569d);
@@ -85,7 +85,7 @@ public class DogServiceImplTests {
 
     @Test
     public void shouldBeRemove() {
-        Mockito.when(petRepository.findById(TEST_DOG.getId())).thenReturn(Optional.of(TEST_DOG));
+        Mockito.when(petRepository.findById(TEST_DOG.getId(), Dog.CLASS_PET)).thenReturn(Optional.of(TEST_DOG));
 
 
         EXPECTED_DOG = petService.remove(TEST_DOG);
@@ -113,7 +113,7 @@ public class DogServiceImplTests {
 
     @Test
     public void shouldBeFindById() {
-        Mockito.when(petRepository.findById(TEST_DOG.getId())).thenReturn(Optional.of(TEST_DOG));
+        Mockito.when(petRepository.findById(TEST_DOG.getId(), Dog.CLASS_PET)).thenReturn(Optional.of(TEST_DOG));
 
         EXPECTED_DOG = petService.findById(TEST_DOG.getId());
         assertsObject(EXPECTED_DOG, TEST_DOG);
@@ -122,7 +122,7 @@ public class DogServiceImplTests {
 
     @Test
     public void shouldBThrown() {
-        Mockito.when(petRepository.findById(TEST_DOG.getId())).thenReturn(Optional.of(null));
+        Mockito.when(petRepository.findById(TEST_DOG.getId(), Dog.CLASS_PET)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundDogByIdException.class, () -> petService.findById(TEST_DOG.getId()));
     }

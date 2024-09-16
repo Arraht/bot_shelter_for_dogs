@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pro.sky.telegrambot.entity.Client;
 import pro.sky.telegrambot.entity.Dog;
 import pro.sky.telegrambot.entity.Report;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.interfaces.shelter.ReportService;
 
 import java.time.LocalDateTime;
@@ -56,7 +56,7 @@ public class ReportControllerWebMvcTests {
         TEST_REPORT.setClient(new Client());
         TEST_REPORT.setPet(new Dog());
         TEST_REPORT.setAccepted(true);
-        TEST_REPORT.setWhoAccepted(new Volunteer());
+        TEST_REPORT.setWhoAccepted(new Volunteers());
         TEST_REPORT.setTextReportFromClient("Test message from client");
 
         TEST_REPORT.setTimeCreated(TEST_LOCAL_DATE_TIME);

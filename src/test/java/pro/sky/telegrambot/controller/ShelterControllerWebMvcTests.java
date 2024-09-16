@@ -14,9 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pro.sky.telegrambot.entity.Shelter;
 import pro.sky.telegrambot.interfaces.shelter.ShelterService;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
