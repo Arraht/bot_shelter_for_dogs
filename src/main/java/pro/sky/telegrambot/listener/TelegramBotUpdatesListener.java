@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Answer;
 import pro.sky.telegrambot.interfaces.bot.BotService;
+import pro.sky.telegrambot.interfaces.bot.CommandService;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private TelegramBot telegramBot;
     @Autowired
     private BotService botService;
+    @Autowired
+    private CommandService commandService;
 
     @PostConstruct
     public void init() {
@@ -38,7 +42,14 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             try {
-                response = telegramBot.execute(botService.check(update));
+                if (botService.checkReport(update)) {
+                    response = telegramBot.execute(botService.reportText(update));
+                    response = telegramBot.execute(botService.report(update));
+                }else if (botService.checkPhoto(update)) {
+                    response = telegramBot.execute(botService.photo(update));
+                } else {
+                    response = telegramBot.execute(botService.check(update));
+                }
             } catch (NullPointerException e) {
                 System.out.println("NullPointerException");
             }

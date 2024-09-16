@@ -1,7 +1,9 @@
 package pro.sky.telegrambot.service.bot;
 
+import com.pengrad.telegrambot.model.PhotoSize;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.request.SendPhoto;
 import org.springframework.stereotype.Component;
 import pro.sky.telegrambot.entity.VolunteersChatId;
 import pro.sky.telegrambot.interfaces.bot.VolunteersChatIdService;
@@ -63,6 +65,39 @@ public class VolunteersChatIdServiceImpl implements VolunteersChatIdService {
         for (VolunteersChatId volunteersChatId : volunteersChatsId) {
             return new SendMessage(volunteersChatId.getChatId(), "Клиент @" + update.callbackQuery()
                     .from().username() + " хочет связаться");
+        }
+        return new SendMessage(update.callbackQuery().message().chat().id(), "");
+    }
+
+    /**
+     * Метод для отправки отчёта(фото) волонтёрам
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendPhoto getReport(Update update) {
+        Integer length = update.message().photo().length - 1;
+        PhotoSize photoSize = update.message().photo()[length];
+        List<VolunteersChatId> volunteersChatsId = volunteersChatIdRepository.findAll();
+        for (VolunteersChatId volunteersChatId : volunteersChatsId) {
+            return new SendPhoto(volunteersChatId.getChatId(), photoSize.fileId());
+        }
+        return null;
+    }
+
+    /**
+     * Метод для отправки отчёта(текст) волонтёрам
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage textReport(Update update) {
+        List<VolunteersChatId> volunteersChatsId = volunteersChatIdRepository.findAll();
+        for (VolunteersChatId volunteersChatId : volunteersChatsId) {
+            return new SendMessage(volunteersChatId.getChatId(), "Отчёт клиента @" + update
+                    .message().chat().username() + "\n" + update.message().caption());
         }
         return new SendMessage(update.callbackQuery().message().chat().id(), "");
     }

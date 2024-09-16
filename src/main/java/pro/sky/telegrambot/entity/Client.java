@@ -20,11 +20,19 @@ public class Client {
     private Long id;
     private String name;
     private Long chatId;
+    private Long contact;
 
     public Client(Long id, String name, Long chatId) {
         this.id = id;
         this.name = name;
         this.chatId = chatId;
+    }
+
+    public Client(Long id, String name, Long chatId, Long contact) {
+        this.id = id;
+        this.name = name;
+        this.chatId = chatId;
+        this.contact = contact;
     }
 
     public Client() {

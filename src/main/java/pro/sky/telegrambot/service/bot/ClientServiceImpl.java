@@ -27,6 +27,22 @@ public class ClientServiceImpl implements ClientService {
     }
 
     /**
+     * Метод для записи контакта клиента
+     *
+     * @param chatId
+     * @param contact
+     */
+    @Override
+    public void createContactClient(Long chatId, Long contact) {
+        Client foudClient = findClientByChatId(chatId);
+        foudClient.setId(findClientByChatId(chatId).getId());
+        foudClient.setName(findClientByChatId(chatId).getName());
+        foudClient.setChatId(findClientByChatId(chatId).getChatId());
+        foudClient.setContact(contact);
+        clientRepository.save(foudClient);
+    }
+
+    /**
      * Метод для поиска клиента в БД
      *
      * @param chatId
