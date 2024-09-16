@@ -124,7 +124,7 @@ public class ReportServiceImplTests {
 
     @Test
     public void shouldBThrown() {
-        Mockito.when(reportRepository.findById(TEST_REPORT.getId())).thenReturn(Optional.of(null));
+        Mockito.when(reportRepository.findById(TEST_REPORT.getId())).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundReportByIdException.class, () -> reportService.findById(TEST_REPORT.getId()));
     }
@@ -135,7 +135,7 @@ public class ReportServiceImplTests {
         Mockito.when(reportRepository.findById(TEST_REPORT.getId())).thenReturn(Optional.of(TEST_REPORT));
         Mockito.when(reportRepository.save(TEST_REPORT)).thenReturn(TEST_REPORT);
 
-        EXPECTED_REPORT = reportService.approved(TEST_REPORT.getId(), false, new Volunteer());
+        EXPECTED_REPORT = reportService.approved(TEST_REPORT.getId(), false, new Volunteers());
 
         assertsObject(EXPECTED_REPORT, TEST_REPORT);
 

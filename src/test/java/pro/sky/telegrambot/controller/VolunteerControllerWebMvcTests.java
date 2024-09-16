@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import pro.sky.telegrambot.entity.Volunteer;
+import pro.sky.telegrambot.entity.Volunteers;
 import pro.sky.telegrambot.interfaces.volunteer.VolunteerService;
 
 import java.time.LocalDateTime;
@@ -31,13 +31,13 @@ public class VolunteerControllerWebMvcTests {
     @MockBean
     private VolunteerService volunteerService;
 
-    private final String REQUEST_MAPPING_CONTROLLER = "/volunteer";
+    private final String REQUEST_MAPPING_CONTROLLER = "/volunteers";
     private final String SLASH = "/";
 
-    private final Volunteer TEST_VOLUNTEER = new Volunteer();
-    private final Volunteer TEST_VOLUNTEER_WITH_NULL_ID = new Volunteer();
+    private final Volunteers TEST_VOLUNTEER = new Volunteers();
+    private final Volunteers TEST_VOLUNTEER_WITH_NULL_ID = new Volunteers();
 
-    private Volunteer EXPEPTED_VOLUNTEER = new Volunteer();
+    private Volunteers EXPEPTED_VOLUNTEER = new Volunteers();
     private JSONObject TEST_JSON_OBJECT;
 
     private LocalDateTime TEST_LOCAL_DATE_TIME = LocalDateTime.now();
@@ -79,11 +79,22 @@ public class VolunteerControllerWebMvcTests {
     @Test
     public void getVolunteer() throws Exception {
         Mockito.when(volunteerService.find(TEST_VOLUNTEER)).thenReturn(TEST_VOLUNTEER);
+
         asserts(
                 mockMvc.perform(MockMvcRequestBuilders
                         .get(REQUEST_MAPPING_CONTROLLER)
                         .content(TEST_JSON_OBJECT.toString())
                         .contentType(MediaType.APPLICATION_JSON))
+//                        .andDo(print())
+//                        .andExpect(status().isOk())
+//                        .andExpect(jsonPath("$").exists())
+//                        .andExpect(jsonPath("$").isMap())
+//                        .andExpect(jsonPath("$.id").value(TEST_VOLUNTEER.getId()))
+//                        .andExpect(jsonPath("$.name").value(TEST_VOLUNTEER.getName()))
+//                        .andExpect(jsonPath("$.workingFirstTime").value(formatter.format(TEST_VOLUNTEER.getWorkingFirstTime())))
+//                        .andExpect(jsonPath("$.workingLastTime").value(formatter.format(TEST_VOLUNTEER.getWorkingLastTime())))
+
+
         );
     }
 

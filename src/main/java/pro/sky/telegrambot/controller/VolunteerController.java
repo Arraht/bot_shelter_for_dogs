@@ -15,7 +15,7 @@ import pro.sky.telegrambot.exception.NotNullIdException;
 import pro.sky.telegrambot.interfaces.volunteer.VolunteerService;
 
 @RestController
-@RequestMapping("/volunteer")
+@RequestMapping("/volunteers")
 public class VolunteerController {
     private final VolunteerService volunteerService;
 
