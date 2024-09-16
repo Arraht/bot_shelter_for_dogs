@@ -101,3 +101,6 @@ id SERIAL,
 volunteer_id INTEGER,
 chat_id INTEGER
 )
+-- changeset Igor:15
+ALTER TABLE Client
+ADD COLUMN contact BIGINT
