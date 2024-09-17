@@ -3,11 +3,13 @@ package pro.sky.telegrambot.listener;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.Answer;
 import pro.sky.telegrambot.interfaces.bot.BotService;
@@ -45,7 +47,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 if (botService.checkReport(update)) {
                     response = telegramBot.execute(botService.reportText(update));
                     response = telegramBot.execute(botService.report(update));
-                }else if (botService.checkPhoto(update)) {
+                } else if (botService.checkPhoto(update)) {
                     response = telegramBot.execute(botService.photo(update));
                 } else {
                     response = telegramBot.execute(botService.check(update));
@@ -56,5 +58,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             logger.info("Processing update: {}", update);
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
+    }
+
+    @Scheduled(fixedDelay = 60_000L)
+    private void listenerReport() {
+        telegramBot.execute(botService.checkReportBot());
     }
 }

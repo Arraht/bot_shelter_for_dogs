@@ -55,6 +55,34 @@ public class CommandServiceImpl implements CommandService {
     }
 
     /**
+     * Метод для установки испытательного срока волонтёром
+     *
+     * @param userName
+     * @param hour
+     * @param minute
+     * @param year
+     * @param month
+     * @param day
+     */
+    @Override
+    public void commandSetCompleteReport(String userName, Integer hour, Integer minute,
+                                         Integer year, Integer month, Integer day) {
+        volunteersChatIdService.setCompeteSendReport(userName, hour, minute, year, month, day);
+    }
+
+    /**
+     * Метод проверки отчёта из БД для бот сервиса
+     *
+     * @param hour
+     * @param minute
+     * @return
+     */
+    @Override
+    public SendMessage commandCheckReportFromRepository(Integer hour, Integer minute) {
+        return volunteersChatIdService.checkReportFromRepository(hour, minute);
+    }
+
+    /**
      * Метод для команды /start
      *
      * @param update
@@ -62,7 +90,8 @@ public class CommandServiceImpl implements CommandService {
      */
     @Override
     public SendMessage getStart(Update update) {
-        clientService.checkClient(null, update.message().chat().firstName(), update.message().chat().id());
+        clientService.checkClient(null, update.message().chat().firstName(), update.message().chat().id(),
+                update.message().chat().username());
         check(update.message().chat().id(), update.message().text());
         return answerService.welcome(update.message().chat().id());
     }
@@ -134,6 +163,17 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public SendMessage checkNickNameRegister(Update update) {
         return volunteersChatIdService.registerVolunteer(update);
+    }
+
+    /**
+     * Метод исполнения для дачи обратной связи
+     *
+     * @param update
+     * @return
+     */
+    @Override
+    public SendMessage getCommandFeedBack(Update update) {
+        return volunteersChatIdService.giveFeedBack(update);
     }
 
     /**

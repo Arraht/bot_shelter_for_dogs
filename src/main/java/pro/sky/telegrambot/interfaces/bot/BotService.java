@@ -9,6 +9,8 @@ import java.io.IOException;
 public interface BotService {
     SendMessage check(Update update);
 
+    SendMessage checkReportBot();
+
     SendPhoto photo(Update update);
 
     SendPhoto report(Update update);

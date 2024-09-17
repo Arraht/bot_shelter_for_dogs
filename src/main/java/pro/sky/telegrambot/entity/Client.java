@@ -21,6 +21,8 @@ public class Client {
     private String name;
     private Long chatId;
     private Long contact;
+    private String userName;
+    private boolean parent;
 
     public Client(Long id, String name, Long chatId) {
         this.id = id;
@@ -33,6 +35,23 @@ public class Client {
         this.name = name;
         this.chatId = chatId;
         this.contact = contact;
+    }
+
+    public Client(Long id, String name, Long chatId, Long contact, String userName) {
+        this.id = id;
+        this.name = name;
+        this.chatId = chatId;
+        this.contact = contact;
+        this.userName = userName;
+    }
+
+    public Client(Long id, String name, Long chatId, Long contact, String userName, boolean parent) {
+        this.id = id;
+        this.name = name;
+        this.chatId = chatId;
+        this.contact = contact;
+        this.userName = userName;
+        this.parent = parent;
     }
 
     public Client() {
