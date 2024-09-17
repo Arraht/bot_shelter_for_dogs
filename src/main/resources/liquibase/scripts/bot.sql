@@ -101,3 +101,39 @@ id SERIAL,
 volunteer_id INTEGER,
 chat_id INTEGER
 )
+-- changeset Igor:15
+ALTER TABLE Client
+ADD COLUMN contact BIGINT
+
+-- changeset Igor:16
+ALTER TABLE Client
+ADD COLUMN user_name TEXT
+
+-- changeset Igor:17
+CREATE TABLE report_from_bot(
+id SERIAL,
+file_size BIGINT,
+file_id TEXT,
+chat_id BIGINT,
+user_name TEXT,
+data_report_bot BYTEA
+)
+-- changeset Igor:18
+ALTER TABLE report_from_bot
+ADD COLUMN message_report_from_bot TEXT
+
+-- changeset Igor:19
+ALTER TABLE report_from_bot
+ADD COLUMN time_send_report TIMESTAMP
+
+-- changeset Igor:20
+ALTER TABLE Client
+ADD COLUMN parent BOOLEAN
+
+-- changeset Igor:21
+ALTER TABLE Client
+ALTER COLUMN parent SET DEFAULT FALSE
+
+-- changeset Igor:22
+ALTER TABLE report_from_bot
+ADD COLUMN time_complete TIMESTAMP
