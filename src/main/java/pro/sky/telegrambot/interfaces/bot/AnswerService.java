@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public interface AnswerService {
 
+    SendMessage admin(Long chatId);
+
     void createAnswer(Long id, String command, Long chatId);
 
     Answer findAnswerByChatId(Long chatId);

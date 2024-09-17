@@ -10,6 +10,12 @@ public interface CommandService {
 
     boolean checkCommand(Long chatId);
 
+    void commandSetCompleteReport(String userName, Integer hour, Integer minute,
+                                  Integer year, Integer month, Integer day);
+
+
+    SendMessage commandCheckReportFromRepository(Integer hour, Integer minute);
+
     SendMessage getStart(Update update);
 
     SendMessage writeContactClient(Update update);
@@ -19,6 +25,8 @@ public interface CommandService {
     SendMessage sendMessageCommandContact(Update update);
 
     SendMessage checkNickNameRegister(Update update);
+
+    SendMessage getCommandFeedBack(Update update);
 
     SendMessage getCommandAdmin(Update update);
 

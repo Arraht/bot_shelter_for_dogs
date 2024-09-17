@@ -92,6 +92,19 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     /**
+     * Метод для волонтёров по обратной связи
+     *
+     * @param chatId
+     * @return
+     */
+    @Override
+    public SendMessage admin(Long chatId) {
+        return new SendMessage(chatId, "Обратная связь").replyMarkup(createMarkupInline(
+                createButton("Дать обратную связь", "ADMIN_FEEDBACK")
+        ));
+    }
+
+    /**
      * Метод для создания сущности Answer
      *
      * @param id

@@ -5,4 +5,6 @@ import pro.sky.telegrambot.entity.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findByChatId(Long chatId);
+
+    Client findByUserName(String userName);
 }

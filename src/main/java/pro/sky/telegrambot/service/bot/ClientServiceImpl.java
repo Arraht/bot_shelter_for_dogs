@@ -5,6 +5,8 @@ import pro.sky.telegrambot.entity.Client;
 import pro.sky.telegrambot.interfaces.bot.ClientService;
 import pro.sky.telegrambot.repository.bot.ClientRepository;
 
+import java.util.List;
+
 @Component
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
@@ -21,9 +23,31 @@ public class ClientServiceImpl implements ClientService {
      * @param name
      * @param chatId
      */
-    private void createClient(Long id, String name, Long chatId) {
+    private void createClient(Long id, String name, Long chatId, String userName) {
         client = new Client(id, name, chatId);
+        client.setUserName("@" + userName);
         clientRepository.save(client);
+    }
+
+    /**
+     * Метод для поиска всех клиентов
+     *
+     * @return
+     */
+    @Override
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
+
+    /**
+     * Метод для поиска клиента по никнейму
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public Client findClientByUserName(String userName) {
+        return clientRepository.findByUserName(userName);
     }
 
     /**
@@ -61,9 +85,9 @@ public class ClientServiceImpl implements ClientService {
      * @param chatId
      */
     @Override
-    public void checkClient(Long id, String name, Long chatId) {
+    public void checkClient(Long id, String name, Long chatId, String userName) {
         if (findClientByChatId(chatId) == null) {
-            createClient(id, name, chatId);
+            createClient(id, name, chatId, userName);
         }
     }
 }
