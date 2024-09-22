@@ -82,10 +82,10 @@ public class ReportController {
             },
             tags = "Report"
     )
-    @GetMapping
-    public ResponseEntity<Report> findReport(@Parameter(description = "структура отчет", required = true)
-                                             @RequestBody Report report) {
-        return ResponseEntity.ok(reportService.find(report));
+    @GetMapping("/{id}")
+    public ResponseEntity<Report> findReport(@Parameter(description = "id отчет", required = true)
+                                                 @PathVariable Long id) {
+        return ResponseEntity.ok(reportService.findById(id));
     }
 
     @Operation(summary = "Редактирование отчета в базе данных",
