@@ -71,10 +71,10 @@ public class VolunteerController {
             },
             tags = "Volunteer"
     )
-    @GetMapping
-    public ResponseEntity<Volunteers> findVolunteer(@Parameter(description = "структура волонтер", required = true)
-                                               @RequestBody Volunteers volunteers) {
-        return ResponseEntity.ok(volunteerService.find(volunteers));
+    @GetMapping("/{id}")
+    public ResponseEntity<Volunteers> findVolunteer(@Parameter(description = "id волонтер", required = true)
+                                                        @PathVariable Long id) {
+        return ResponseEntity.ok(volunteerService.findById(id));
     }
 
     @Operation(summary = "Редактирование волонтера в базе данных",

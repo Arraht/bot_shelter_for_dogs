@@ -74,10 +74,10 @@ public class DogController {
             },
             tags = "Dog"
     )
-    @GetMapping
-    public ResponseEntity<Pet> findDog(@Parameter(description = "структура собака", required = true)
-                                                   @RequestBody Dog dog) {
-        return ResponseEntity.ok(dogService.find(dog));
+    @GetMapping("/{id}")
+    public ResponseEntity<Pet> findDog(@Parameter(description = "id собака", required = true)
+                                           @PathVariable Long id) {
+        return ResponseEntity.ok(dogService.findById(id));
     }
 
     @Operation(summary = "Редактирование собакb в базе данных",

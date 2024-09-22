@@ -71,10 +71,10 @@ public class ShelterController {
             },
             tags = "Shelter"
     )
-    @GetMapping
-    public ResponseEntity<Shelter> findShelter(@Parameter(description = "структура приют", required = true)
-                                                   @RequestBody Shelter shelter) {
-        return ResponseEntity.ok(shelterService.find(shelter));
+    @GetMapping("/{id}")
+    public ResponseEntity<Shelter> findShelter(@Parameter(description = "id приют", required = true)
+                                                   @PathVariable Long id) {
+        return ResponseEntity.ok(shelterService.findById(id));
     }
 
     @Operation(summary = "Редактирование приюта в базе данных",
